@@ -223,6 +223,7 @@ class App extends React.Component {
   }
 
   // 输入价格和主币兑换人民币
+  // usdtToCnyRate 为global.js中固定费率
   transferToCNY = (latestPrice, marketName) => {
     const { usdtToCnyRate, rateInfo } = this.props;
     const {

@@ -33,6 +33,7 @@ export default {
       dispatch({ type: 'fetchRate' });
       dispatch({ type: 'decideShowC2c' });
       // dispatch({ type: 'decideShowRank' });
+      dispatch({ type: 'fetchRateNew'});
     }
   },
 
@@ -90,6 +91,24 @@ export default {
           type: 'save',
           payload: {
             rateInfo: response.data
+          }
+        });
+      } catch (error) {}
+    },
+
+    // 获取汇率
+    *fetchRateNew(_, { call, put }) {
+      const queryRateNew = () =>
+        request('/user/usdt/exchangeRate', {
+          method: 'GET'
+        });
+
+      try {
+        const response = yield call(queryRateNew);
+        yield put({
+          type: 'save',
+          payload: {
+            usdtToCnyRate: response.data && response.data.exRate
           }
         });
       } catch (error) {}
