@@ -1,0 +1,400 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+.clickfarm{
+    position: relative;
+    margin: 0 7vw 2.2vw;
+    zoom: 1;
+    p,h2,h6{
+        margin: 0;
+    }
+    .valid_user{
+        display: inline-block;
+        background: #E64F4F;
+        padding: .2vw .8vw;
+        border-radius: 2.2vw;
+        font-size: .9vw;
+        color: #fff;
+    }
+    .invalid_user{
+        display: inline-block;
+        background: #ccc;
+        padding: .3vw .9vw;
+        border-radius: 2.2vw;
+        font-size: .9vw;
+        color: #fff;
+    }
+    .titles{
+        overflow: auto;
+        margin-bottom: 1.11vw;
+        color: #E64F4F;
+        font-size: 1.6vw;
+        font-weight: 500;
+        padding-left: 1.7vw;
+        padding-bottom: 1.11vw;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #f5f5f5;
+        .btns{
+            a{
+                display: inline-block;
+                background: #E64F4F;
+                padding: .19vw 1.4vw;
+                border-radius: 2.2vw;
+                font-size: 1vw;
+                color: #fff;
+                margin-left: 1.11vw;
+                &.single_line{
+                    padding: 0.67vw 0.7vw;
+                }
+                h6{
+                    font-size: 0.67vw;
+                    color: #fefefe;
+                    margin: 0;
+                }
+                p{
+                    font-size: 0.89vw;
+                    margin: 0;
+                }
+            }
+        }
+    }
+    .banner{
+        width: 100%;
+        padding: 5.4vw 1.7vw;
+        height: 27.2vw;
+        background: url(../../../assets/images/card_bg.png) no-repeat;
+        background-size: 100% 100%;
+        text-align: center;
+        h1{
+            font-size: 4.2vw;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 1.6vw;
+            span{
+                margin-right: 1.4vw;
+            }
+        }
+        p{
+            color: #fff;
+            font-size: 1.4vw;
+            margin-bottom: .5vw;
+            &.money{
+                font-size: 4.2vw;
+                margin:0;
+            }
+            &.tips{
+                font-size: 1vw;
+                margin:0;
+            }
+        }
+    }
+
+    .activities,
+    .list,
+    .my_clickfarm{
+        padding-bottom: 1.11vw;
+        margin: 0 1.7vw;
+    }
+    .list{
+        td,th{
+            text-align: center;
+        }
+    }
+    .invitation{
+        background: url(../../../assets/images/invite_bg.png) no-repeat;
+        background-size: 100% 100%;
+        margin: 0 1.7vw 2.2vw;
+        padding: 2.5vw 3.47vw;
+        display: flex;
+        justify-content: space-between;
+        .invite_slogan{
+            h2{
+                font-size: 2.08vw;
+                color: #fff;
+                margin: 0;
+            }
+            p{
+                font-size: 1.4vw;
+                color: #fff;
+                margin-bottom: .9vw;
+            }
+            a{
+                display: inline-block;
+                border-radius: 2.2vw;
+                padding: 0.3vw 2.2vw;
+                color: #E64F4F;
+                background: #fff;
+                font-size: 1.7vw;
+                font-weight: 700;
+            }
+        }
+        .invite_levels{
+            width: 30.42vw;
+            padding: 2.5vw 3.47vw;
+            border-radius: 5.55vw;
+            color: #fff;
+            background: rgba(0,0,0,.1);
+            display: flex;
+            justify-content: space-between;
+            .levels{
+                // flex:1;
+                // &:last-child{
+                //     flex:2;
+                // }
+                h6{
+                    font-size: 1.25vw;
+                    color: #fff;
+                    font-weight: 500;
+                    margin-bottom: 0.7vw;
+                }
+                p{
+                    font-size: 1.7vw;
+                }
+            }
+        }
+        img{
+            width: 10vw;
+            height: 9.3vw;
+        }
+    }
+    .my_clickfarm,
+    .community,
+    .income_detail{
+        margin: 0 1.7vw;
+        .titles{
+            .btns{
+                .single_line{
+                    padding: 0.44vw 2.2vw !important;
+                    border: 1px solid #E64F4F;
+                    &:first-child{
+                        background: #fff;
+                        color: #E64F4F;
+                    }
+                }
+            }
+        }
+        .card{
+            background: #F5F5F5;
+            border-radius: 0.42vw;
+            text-align: center;
+            margin: 1.7vw 0.55vw;
+            padding: 2.78vw 0;
+            img{
+                margin-bottom: 1.7vw;
+            }
+            h6{
+                color: #646464;
+                font-size: 1vw;
+            }
+            p{
+                color: #0D222D;
+                font-size: 1.11vw;
+                font-weight: 700;
+            }
+        }
+    }
+    .community{
+        :global{
+            .ant-table-content{
+                overflow: hidden;
+            }
+            .users{
+                text-align: left !important;
+            }
+        }
+        .cards{
+            display: flex;
+            .card{
+                width: 20%;
+            }
+        }
+    }
+    .income_detail{
+        margin-top: 1.7vw;
+        // :global{
+        //     .margin:first-child div{
+        //         padding-left: 2vw;
+        //     }
+        //     .margin:last-child div{
+        //         padding-right: 2vw;
+        //     }
+        // }
+        .titles{
+            display: flex;
+            justify-content: space-between;
+            .lists{
+                a{
+                    color: #646464;
+                    font-size: 1vw;
+                    font-weight: 700;
+                    margin: 0 1.7vw;
+                    display: inline-block;
+                    &:hover{
+                        color: #E64F4F;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 1100px){
+        :global {
+            .ant-tabs-nav-wrap {
+              margin-top: -0.8vw;
+            }
+            .ant-table-fixed{
+                width: 100% !important;
+            }
+
+        }
+    }}
+@media screen and (max-width: 1024px){
+    .income_detail{
+        .titles{
+            span{
+                margin-top: 1vw;
+            }
+            .lists{
+                width:70vw;
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    .clickfarm{
+        .titles{
+            span{
+                display: inline-block;
+                margin-top: 1vw;
+            }
+        }
+        .activities{
+            .titles{
+                span{
+                    display: inline-block;
+                    margin-top: 0;
+                }
+            }
+        }
+        .invitation{
+            .invite_levels{
+                font-size: .6vw;
+            }
+        }
+        .income_detail{
+            .titles{
+                span{
+                    // margin-top: 3vw;
+                }
+                .lists{
+                    width:70vw;
+                }
+            }
+            :global {
+                .ant-tabs-nav .ant-tabs-tab{
+                    margin-right: 0;
+                }
+                .ant-tabs {
+                    span.ant-tabs-tab-prev-icon,
+                    span.ant-tabs-tab-next-icon{
+                        top:10%;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 414px){
+    :root .ant-tabs-nav > div .ant-tabs-tab{
+        padding: 0.2rem 0.75rem;
+    }
+    .clickfarm{
+        .community{
+            .cards{
+                display: flex;
+                flex-wrap:wrap;
+                justify-content: space-between;
+                .card{
+                    width: 48.5%;
+                }
+            }
+        }
+        .titles{
+            font-size: 4vw;
+            span{
+                display: inline-block;
+                // margin-top: 2vw;
+            }
+        }
+        .activities{
+            .titles{
+                span{
+                    display: inline-block;
+                    margin-top: 1vw;
+                }
+            }
+        }
+        .invitation{
+            padding: 2.5vw 2vw;
+            .invite_levels{
+                padding: 2.5vw 2vw 2.5vw 3vw;
+                width: auto;
+                flex: 2;
+            }
+            img{
+                display: block;
+                margin-top: 10%;
+                display: none;
+            }
+        }
+        .income_detail{
+            .titles{
+                display: flex;
+                justify-content: space-between;
+                span{
+                    margin-top: 3vw;
+                }
+                .lists{
+                    width:64vw;
+                }
+            }
+            :global {
+                .ant-tabs {
+                    span.ant-tabs-tab-prev-icon,
+                    span.ant-tabs-tab-next-icon{
+                        top:2%;
+                    }
+                }
+            }
+        }
+    }
+}
+:global {
+    //.no_padding{
+    //    padding-top: .7rem !important;
+    //    padding-bottom: .7rem !important;
+    //    height: 3.72vw !important;
+    //}
+    .ant-tabs-bar {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .ant-tabs {
+        span.ant-tabs-tab-prev-icon,
+        span.ant-tabs-tab-next-icon{
+            top:0;
+        }
+    }
+    #scrollAuto{
+        overflow-x: hidden; overflow-y: auto;
+    }
+    th{
+        height: 3rem !important;
+        padding: 0 1rem !important;
+    }
+    td{
+        height: 3.4rem !important;
+        padding: 0 1rem !important;
+    }
+
+}

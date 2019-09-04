@@ -1,0 +1,11 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": {
+        "count": 2,
+         "list":[
+             {"id":"xxx1", "username":"xxxx1"},
+             {"id":"xxx2", "username":"xxxx2" }
+         ]
+    }
+}

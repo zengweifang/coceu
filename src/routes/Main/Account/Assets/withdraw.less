@@ -1,0 +1,81 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.withdraw {
+  .count {
+    display: flex;
+    justify-content: space-between;
+    li {
+      width: 45%;
+    }
+    .title {
+      line-height: 1.875rem;
+    }
+    .money,
+    .number {
+      position: relative;
+      span {
+        position: absolute;
+        right: 0.625rem;
+        top: 0.5rem;
+      }
+    }
+  }
+  .block {
+    .clearfix();
+    ul {
+      float: left;
+      width: 50%;
+    }
+    .btn {
+      float: left;
+      width: 50%;
+      text-align: center;
+    }
+  }
+  .title {
+    line-height: 1.875rem;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.625rem;
+  }
+  .restNumber {
+    color: @primary-color;
+    margin-right: 1.25rem;
+    font-weight: 600;
+  }
+  .limiteNumber {
+    color: @primary-color;
+    font-weight: 600;
+  }
+  .minWithdraw {
+    color: @primary-color;
+    margin: 0 1.25rem;
+    font-weight: 600;
+  }
+  :global {
+    .ant-select-selection {
+      background-color: @white-color;
+      .ant-select-selection__rendered {
+        .ant-select-search--inline .ant-select-search__field {
+          background-color: @white-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .withdraw {
+    .block {
+      ul {
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

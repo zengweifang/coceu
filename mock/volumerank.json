@@ -1,0 +1,18 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data":{
+        "userRank":"2",
+        "list": [
+            {"id":1, "userName":"xxxx1","coinBalance":123},
+            {"id":2, "userName":"xxxx2" ,"coinBalance":1234},
+            {"id":3, "userName":"xxxx3" ,"coinBalance":1234},
+            {"id":4, "userName":"xxxx4" ,"coinBalance":1234},
+            {"id":5, "userName":"xxxx5" ,"coinBalance":1234},
+            {"id":6, "userName":"xxxx5" ,"coinBalance":1234},
+            {"id":7, "userName":"xxxx5" ,"coinBalance":1234},
+            {"id":8, "userName":"xxxx5" ,"coinBalance":1234}
+     ]
+    }
+
+}

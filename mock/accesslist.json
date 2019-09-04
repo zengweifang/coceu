@@ -1,0 +1,20 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": [
+        {
+            "id":"xxx1", 
+            "createStr":"2019-05-24 08:00",
+            "coinNum":5.5,
+            "coinSymbol":"USDT",
+            "flag":1
+        },
+        {
+            "id":"xxx2", 
+            "createStr":"2019-05-24 08:00",
+            "coinNum":5.5,
+            "coinSymbol":"USDT",
+            "flag":1
+        }      
+    ]
+}

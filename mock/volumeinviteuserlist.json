@@ -1,0 +1,10 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": [
+           {"id":"xxx1", "userName":"xxxx1","validNum":0,"teamAmount":111,"teamLevel":1, "coinBalance": 1},
+           {"id":"xxx2", "userName":"xxxx1","validNum":5,"teamAmount":111,"teamLevel":2, "coinBalance": 220},
+           {"id":"xxx3", "userName":"xxxx1","validNum":5,"teamAmount":111,"teamLevel":3, "coinBalance": 150},
+           {"id":"xxx4", "userName":"xxxx1","validNum":5,"teamAmount":111,"teamLevel":4, "coinBalance": 300}
+    ]
+}

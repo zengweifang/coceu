@@ -1,0 +1,43 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.finance {
+  position: relative;
+  .coinSelect {
+    position: absolute;
+    top: -3.125rem;
+    right: 0;
+  }
+  .withdrawExpend {
+    li {
+      display: flex;
+      padding: 0.25rem 0;
+      > div {
+        width: 50%;
+        display: flex;
+        font-size: 0.875rem;
+        word-break: break-all;
+      }
+    }
+    .title {
+      min-width: 7.5rem;
+      text-align: right;
+      margin-right: 0.625rem;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .finance {
+    .withdrawExpend {
+      li {
+        display: block;
+        > div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

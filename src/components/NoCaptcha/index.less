@@ -1,0 +1,46 @@
+:global {
+  .nc-container {
+    .nc_wrapper {
+      margin: 0 auto;
+      .nc_scale {
+        height: 2.5rem;
+        background: #e8e8e8;
+        span {
+          z-index: 1;
+          width: 3rem;
+          height: 2.5rem;
+          line-height: 2.5rem;
+          border: 0.0625rem solid #ccc;
+          background: #c4c7d6 url('//g.alicdn.com/sd/ncpc/images/rt.png') no-repeat center;
+        }
+        .scale_text {
+          color: #9c9c9c;
+          /* 默认字体颜色 */
+        }
+        div.nc_bg {
+          background: @primary-color;
+          /* 滑过时的背景色 */
+        }
+        .scale_text2 {
+          color: #fff;
+          /* 滑过时的字体颜色 */
+        }
+        .btnok {
+          background: #fff url('//g.alicdn.com/sd/ncpc/images/yes.png') no-repeat center;
+        }
+        .btn_ok {
+          line-height: 2.5rem;
+          color: @primary-color;
+          background: #c4c7d6;
+        }
+      }
+      div.errloading {
+        margin: 0 auto;
+        border: #faf1d5 0.0625rem solid;
+        background: url('//g.alicdn.com/sd/ncpc/images/no.png') #fffff0 no-repeat 0.625rem 0.5625rem;
+        color: @primary-color;
+        width: 100%;
+      }
+    }
+  }
+}

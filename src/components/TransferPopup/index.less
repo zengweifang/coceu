@@ -1,0 +1,51 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../utils/utils.less";
+.transferPopup {
+  .title {
+    margin-bottom: 0.25rem;
+    margin-top: 0.4rem;
+    padding-left: 0.25rem;
+  }
+  .volumeLine {
+    position: relative;
+    span {
+      position: absolute;
+      display: block;
+      top: 0.25rem;
+      cursor: pointer;
+      right: 1rem;
+      font-size: 0.875rem;
+      color: @primary-color;
+    }
+    .volumeInput {
+      color: @dark-color;
+      border-color: @border-color-base; 
+      caret-color: @text-color;
+    }
+  }
+  .damagesLine{
+    margin-top: 0.5rem;
+    span{
+      color: @primary-color;
+      font-weight: 600;
+    }
+  }
+}
+
+:global {
+  .transfer-wrap {
+    .ant-select-selection__rendered {
+      line-height: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .transferModal {
+    :global {
+      .ant-modal {
+        width: 21rem !important;
+      }
+    }
+  }
+}

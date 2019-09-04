@@ -1,0 +1,79 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.signup {
+  width: 27rem;
+  margin: 5rem auto;
+}
+
+.codeForm {
+  position: relative;
+  .codeText {
+    position: absolute;
+    top: -0.625rem;
+    right: 0;
+    padding: 0 1.25rem;
+    cursor: pointer;
+    color: @primary-color;
+    width: 7.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    &::before {
+      display: block;
+      height: 1.75rem;
+      content: '';
+      width: 0.0625rem;
+      background: #999999;
+      position: absolute;
+      top: 0.3125rem;
+      left: 0;
+    }
+  }
+}
+
+.title {
+  height: 1rem;
+  position: relative;
+  top: -0.875rem;
+  padding-left: 0.375rem;
+}
+
+.guideDownload {
+  width: 18.75rem;
+  margin-top: 1.875rem;
+  text-align: center;
+  i {
+    font-size: 3.75rem;
+    color: @green-color;
+  }
+  h3 {
+    margin: 1.25rem 0;
+    font-size: 1.25rem;
+    color: @green-color;
+  }
+  .operation {
+    display: flex;
+    justify-content: space-between;
+    button {
+      min-width: 40%;
+      &.download {
+        border-color: @green-color;
+        background: @green-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .signup {
+    width: auto;
+    margin: 5rem 1.125rem;
+  }
+  :global {
+    .mobile {
+      .ant-form {
+        margin: 1.25rem;
+      }
+    }
+  }
+}

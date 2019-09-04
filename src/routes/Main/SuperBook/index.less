@@ -1,0 +1,188 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.superBook {
+  text-align: center;
+  h1 {
+    margin-top: 3rem;
+    color: @primary-color;
+  }
+  .searchBox {
+    width: 40rem;
+    margin: 2rem auto 5rem;
+  }
+  h2 {
+    margin: 5rem auto 1rem;
+    text-align: left;
+    font-size: 1.125rem;
+    span {
+      color: lighten(@dark-color, 60%);
+    }
+  }
+  .ellipsis {
+    width: 12.5rem;
+    color: @primary-color !important;
+    cursor: pointer;
+    .textOverflow();
+  }
+  .table {
+    .head {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f2f2f2;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .body {
+      border-bottom: 1px solid #e8e8e8;
+      li {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
+    .pagination {
+      margin-top: 2rem;
+      text-align: right;
+      span {
+        padding: 0;
+      }
+    }
+    span {
+      flex: 1 1 auto;
+      padding: 1rem 0.625rem;
+      font-size: 0.875rem;
+      text-align: left;
+      color: rgba(0, 0, 0, 0.85);
+      &.txHash {
+        flex-basis: 17rem;
+      }
+      &.areaHeight {
+        flex-basis: 7.5rem;
+        .areaHeightText {
+          display: none;
+        }
+      }
+      &.outAddress {
+        flex-basis: 17rem;
+      }
+      &.arrow {
+        flex-basis: 0.3rem;
+        text-align: center;
+        color: @primary-color;
+        font-weight: bolder;
+      }
+      &.inAddress {
+        flex-basis: 17rem;
+      }
+      &.volume {
+        text-align: right;
+        flex-basis: 10rem;
+      }
+      &.countDate {
+        text-align: right;
+        flex-basis: 9rem;
+      }
+      &.more {
+        display: none;
+      }
+    }
+  }
+}
+.info {
+  li {
+    display: flex;
+    margin: 0.625rem 0;
+    word-break: break-all;
+    span {
+      flex: 0 0 5.625rem;
+      color: lighten(@dark-color, 60%);
+      word-break: keep-all;
+      text-align: right;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .superBook {
+    .ellipsis {
+      width: 3.125rem;
+    }
+    .searchBox {
+      width: 20rem;
+    }
+    .table {
+      border-top: 1px solid #e8e8e8;
+      .head {
+        display: none;
+      }
+      .body {
+        padding-top: 0.625rem;
+        li {
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          margin-bottom: 0.625rem;
+          padding-top: 2rem;
+          border-bottom: none;
+          border-radius: @border-radius-base;
+          background-color: @white-color;
+        }
+      }
+      .pagination {
+        margin: 2rem -0.3125rem 0;
+        text-align: center;
+      }
+      span {
+        flex: 1 1 auto;
+        padding: 1rem 0.3125rem;
+        font-size: 0.875rem;
+        text-align: left;
+        color: rgba(0, 0, 0, 0.85);
+        &.txHash {
+          display: none;
+        }
+        &.areaHeight {
+          order: 1;
+          flex-basis: 8.125rem;
+          margin-right: 0.9375rem;
+          .areaHeightText {
+            display: inline-block;
+            padding: 0;
+            font-size: 0.75rem;
+            color: lighten(@dark-color, 50%);
+          }
+        }
+        &.outAddress {
+          flex-basis: 6rem;
+        }
+        &.inAddress {
+          flex-basis: 6rem;
+        }
+        &.volume {
+          position: absolute;
+          top: 0;
+          flex-basis: 8.125rem;
+          text-align: left;
+          font-size: 1.25rem;
+          em {
+            font-size: 0.75rem;
+          }
+        }
+        &.countDate {
+          position: absolute;
+          top: 0;
+          right: 0;
+          text-align: right;
+          flex-basis: 7.5rem;
+        }
+        &.more {
+          display: block;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          color: @primary-color;
+        }
+      }
+    }
+  }
+}

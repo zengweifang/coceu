@@ -1,0 +1,69 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+.transferPopup {
+  h4 {
+    margin-top: 15px;
+  }
+  h5 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 0.875rem;
+    span {
+      strong {
+        color: @primary-color;
+      }
+    }
+  }
+  .volume {
+    display: flex;
+    justify-content: space-between;
+  }
+  footer {
+    margin-top: 20px;
+    text-align: right;
+    button {
+      width: 150px;
+    }
+  }
+}
+
+.conTransfPopup {
+  .wrap {
+    padding: 0 1.875rem;
+    h4 {
+      text-align: center;
+      font-size: 1.25rem;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    .checkBox {
+      margin: 0.75rem 0 1.25rem 0;
+    }
+  }
+  footer {
+    button {
+      width: 50%;
+    }
+  }
+  :global {
+    .ant-modal-body {
+      padding: 1.875rem 0 0 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .transferPopup {
+    width: 21rem;
+  }
+  .conTransfPopup{
+    .wrap {
+      width: 21rem;
+    }
+  }
+}

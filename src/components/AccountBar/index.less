@@ -1,0 +1,109 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.bar {
+  flex: 0 0 12.5rem;
+  border: 1px solid @light-border-color;
+  border-radius: @border-radius-base;
+  overflow: hidden;
+  transition: all 0.2s linear;
+  .category {
+    background-color: @white-color;
+    h3 {
+      display: flex;
+      height: 3.125rem;
+      padding: 0 0.625rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+      background-color: @table-header-bg;
+    }
+    .links {
+      padding-bottom: 0.625rem;
+      a {
+        display: block;
+        position: relative;
+        padding: 0 1.875rem;
+        line-height: 1.875rem;
+        font-size: 0.875rem;
+        color: darken(@white-color, 40%);
+        &.active {
+          color: @primary-color;
+          &:before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 0.125rem;
+            content: '';
+            background-color: @primary-color;
+          }
+        }
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: translate3d(100%, 0, 0);
+    &.unfold {
+      transform: translate3d(0, 0, 0);
+      .barWrapper {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    .barWrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 60%;
+      border: 0;
+      transform: translate3d(100%, 0, 0);
+      transition: all 0.2s ease-in;
+      background-color: lighten(@header-bg-color, 15%);
+    }
+    .category {
+      background-color: lighten(@header-bg-color, 15%);
+      h3 {
+        color: @gray-color;
+        height: 1.875rem;
+        margin-bottom: 0;
+        padding: 0 0.625rem;
+        font-size: 0.75rem;
+        background-color: lighten(@header-bg-color, 10%);
+      }
+      .links {
+        padding-bottom: 0;
+        a {
+          line-height: 2.5rem;
+          &.active {
+            color: @gray-color;
+            background-color: @primary-color;
+          }
+        }
+      }
+    }
+    .logout {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      line-height: 2.875rem;
+      text-align: center;
+      color: @gray-color;
+      border-top: 0.0625rem solid @dark-border-color;
+    }
+  }
+}

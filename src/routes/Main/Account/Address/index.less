@@ -1,0 +1,71 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.address {
+  position: relative;
+  padding-right: 1.875rem;
+  width: 100%;
+  .attr {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 5rem;
+    .item {
+      flex: 1;
+      margin-left: 1.875rem;
+    }
+    .block {
+      position: absolute;
+      right: 0;
+      bottom: -3.75rem;
+      button {
+        width: 7.5rem;
+      }
+    }
+    :global {
+      .ant-select {
+        width: 7.5rem;
+      }
+    }
+  }
+  h4 {
+    line-height: 1.25rem;
+    font-size: 0.75rem;
+    color: lighten(@dark-color, 50%);
+  }
+  .delete {
+    color: @red-color;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .address {
+    padding-right: 0;
+    .attr {
+      flex-direction: column-reverse;
+      margin-bottom: 2rem;
+      li {
+        margin-bottom: 0.9375rem;
+        &.item {
+          flex: 1;
+          margin-left: 0;
+        }
+        :global {
+          .ant-select {
+            width: 48%;
+          }
+        }
+        &.block {
+          bottom: 0;
+          width: 48%;
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

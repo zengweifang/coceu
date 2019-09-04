@@ -1,0 +1,109 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.redpacket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/images/redpacket/bg_2.svg') left bottom
+      no-repeat,
+    radial-gradient(closest-side at 100% 30%, #ffffff 20%, #fff3bd 100%);
+  background-size: 100%;
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    content: '';
+    background: url('../../../assets/images/redpacket/bg.svg') left top
+      no-repeat;
+    background-size: 100%;
+  }
+  .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 88%;
+    max-height: 600px;
+    min-height: 70%;
+    overflow: hidden;
+    background-color: #cd533d;
+    border-radius: 0.25rem;
+    transform: translate(-50%, -50%);
+    .top {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 120%;
+      height: 70%;
+      background: #d85940;
+      box-shadow: 0 4px 6px 0 #c34c36;
+      border-bottom-right-radius: 50% 25%;
+      border-bottom-left-radius: 50% 25%;
+      transform: translateX(-50%);
+      .header {
+        padding-top: 2.025rem;
+        text-align: center;
+        color: #f7c69a;
+        font-size: 0.875rem;
+        h3 {
+          margin: 0.625rem auto 0;
+          color: #ffe2b1;
+          font-size: 1.125rem;
+        }
+      }
+      .feedback {
+        margin-top: 3rem;
+        color: #ffe2b1;
+        font-size: 1.25rem;
+        text-align: center;
+        line-height: 4.375rem;
+        strong {
+          font-size: 3rem;
+          font-weight: normal;
+        }
+      }
+    }
+    .handler {
+      position: absolute;
+      top: 58%;
+      left: 50%;
+      width: 6.75rem;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform: translateX(-50%);
+      .front {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 6.75rem;
+        transform-style: preserve-3d;
+      }
+      &.opening {
+        .front {
+          animation: turnfront 0.8s infinite;
+        }
+      }
+    }
+    .view {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5rem;
+      color: #fbd6a8;
+      font-size: 15px;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@keyframes turnfront {
+  0% {
+    transform: perspective(700px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(700px) rotateY(-180deg);
+  }
+}

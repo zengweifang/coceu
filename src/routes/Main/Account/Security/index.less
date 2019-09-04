@@ -1,0 +1,66 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.security {
+  .card {
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    background-color: @white-color;
+    border-radius: @border-radius-base;
+    border: 1px solid @light-border-color;
+    &.unfold {
+      .header {
+        box-shadow: 0 0.1875rem 0.1875rem rgba(0, 0, 0, 0.05);
+      }
+      .action {
+        top: 0;
+        height: auto;
+        padding: 2.5rem;
+        opacity: 1;
+      }
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1.25rem;
+      background-color: @white-color;
+      .title {
+        :global {
+          .anticon {
+            margin-right: 0.3125rem;
+            font-size: 1.25rem;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .action {
+      top: -100%;
+      height: 0;
+      padding: 0 2.5rem;
+      overflow: hidden;
+      opacity: 0;
+      transition: 0.2s linear;
+      button[type='submit'] {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .security {
+    .card {
+      &.unfold {
+        .action {
+          padding: 1.5rem 0.625rem 0.625rem;
+        }
+      }
+      .header {
+        padding: 1.25rem 0.625rem;
+      }
+    }
+  }
+}

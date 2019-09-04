@@ -1,0 +1,27 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": [
+        {
+            "id":"1138989094577020928", 
+            "coinNum":1234,
+            "coinSymbol":"USDT",
+            "createStr":"2019-06-13 23:47:57",
+            "accumulIncome":9.872
+        },
+        {
+            "id":"1138989094577020929", 
+            "coinNum":1234,
+            "coinSymbol":"USDT",
+            "createStr":"2019-06-13 23:47:57",
+            "accumulIncome":9.872
+        },
+        {
+            "id":"1138989094577020927", 
+            "coinNum":1234,
+            "coinSymbol":"USDT",
+            "createStr":"2019-06-13 23:47:57",
+            "accumulIncome":9.872
+        }
+    ]
+}

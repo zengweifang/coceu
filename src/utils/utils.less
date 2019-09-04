@@ -1,0 +1,143 @@
+.textOverflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
+}
+
+.textOverflowMulti(@line: 3, @bg: #fff) {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.5em;
+  max-height: @line * 1.5em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    background: @bg;
+    content: '...';
+    padding: 0 1px;
+    position: absolute;
+    right: 14px;
+    bottom: 0;
+  }
+  &:after {
+    background: white;
+    content: '';
+    margin-top: 0.2em;
+    position: absolute;
+    right: 14px;
+    width: 1em;
+    height: 1em;
+  }
+}
+
+// mixins for clearfix
+// ------------------------
+.clearfix() {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10%, 0) scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0) scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0) scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes flash {
+  from {
+    opacity: 0;
+    background-color: var(--flashColor);
+  }
+  to {
+    opacity: 1;
+    background-color: var(--flashColor);
+  }
+}
+
+// // width
+// @wrapper-width: 75rem; //容器最小宽度
+// // space
+// @mobile-space: 0.625rem; //移动端间距
+// // font color
+// @gray-color: lighten(@dark-bg-color, 65%); //黑色背景上面字体颜色
+// @green-color: #14c974; //绿色
+// @red-color: #ff586d; //红色
+// @footer-font-color: #727b90; //底部文字颜色
+// @white-color: #fff;
+// @dark-color: #000;
+// // background color
+// @dark-bg-color: #2a2a43; //深背景颜色
+// @light-bg-color: #eaf2fe; //浅背景颜色
+// @header-bg-color: darken(@dark-bg-color, 10%); //头部背景颜色
+// @footer-bg-color: darken(@dark-bg-color, 10%); //底部背景颜色
+// @widget-bg-color: darken(@dark-bg-color, 10%); //grid-layout 部件背景色
+// // border color
+// @border-color: #e9e9e9; //边框颜色
+// @light-border-color: #f2f2f2; //浅边框颜色
+// @dark-border-color: #3f3f3f;
+
+
+//after modify 
+// width
+@wrapper-width: 75rem; //容器最小宽度
+// space
+@mobile-space: 0.625rem; //移动端间距
+// font color
+@gray-color: lighten(@dark-bg-color, 65%); //黑色背景上面字体颜色
+@green-color: #009900; //绿色
+@red-color: #e82f2f; //红色
+@footer-font-color: #fff; //底部文字颜色
+@white-color: #fff;
+@dark-color: #333;
+@dark-color-9: #999999;
+@hover-color: #F08080;
+// background color
+@dark-bg-color: #e82f2f; //深背景颜色
+@light-bg-color: #e5e5e6; //浅背景颜色
+@header-bg-color: darken(@dark-bg-color, 0%); //头部背景颜色
+@footer-bg-color: darken(@dark-bg-color, 10%); //底部背景颜色
+@widget-bg-color: darken(@dark-bg-color, 10%); //grid-layout 部件背景色
+// border color
+@border-color: #e9e9e9; //边框颜色
+@light-border-color: #f2f2f2; //浅边框颜色
+@dark-border-color: #fff;
+

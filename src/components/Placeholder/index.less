@@ -1,0 +1,30 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.toLogin {
+  width: 100%;
+  line-height: 7.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.loading {
+  padding: 3.125rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  > div {
+    border-color: @primary-color;
+    border-bottom-color: transparent;
+  }
+}
+
+.empty {
+  padding: 3.125rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  animation: fadeIn 0.5s linear;
+  i {
+    display: block;
+    font-size: 2rem;
+  }
+}

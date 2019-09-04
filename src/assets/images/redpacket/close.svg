@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="57px" height="57px" viewBox="0 0 57 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>删除</title>
+    <desc>Created with Sketch.</desc>
+    <g id="删除" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="椭圆形" stroke="#D4A668" fill-rule="nonzero" cx="28.5" cy="28.5" r="27.5"></circle>
+        <rect id="矩形" fill="#D4A668" fill-rule="nonzero" transform="translate(29.000000, 28.500000) rotate(-45.000000) translate(-29.000000, -28.500000) " x="9" y="28" width="40" height="1"></rect>
+        <rect id="矩形" fill="#D4A668" fill-rule="nonzero" transform="translate(29.000000, 28.500000) scale(-1, 1) rotate(-45.000000) translate(-29.000000, -28.500000) " x="9" y="28" width="40" height="1"></rect>
+    </g>
+</svg>

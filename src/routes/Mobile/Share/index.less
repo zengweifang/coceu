@@ -1,0 +1,77 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.share {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/images/share_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.wechatMask {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 6.25rem;
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wechatMask:after {
+  z-index: 2;
+  content: '\e634';
+  position: fixed;
+  top: 0;
+  right: 5%;
+  font-family: iconfont;
+  color: #fff;
+  font-size: 5rem;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+}
+
+.share h4 {
+  color: #0e3e8d;
+  font-size: 1.25rem;
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 9%;
+  line-height: 1.75rem;
+  font-weight: normal;
+  text-align: center;
+}
+
+.content {
+  position: absolute;
+  bottom: 22%;
+  left: 5%;
+  right: 5%;
+  margin: 0 auto;
+  line-height: 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 0;
+  width: 100%;
+  padding: 0 10%;
+  .download {
+    margin-top: 1.25rem;
+    border-color: @green-color;
+    background: @green-color;
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": [
+        {"id":"23597ebbe96849368696cc298bb04463", "name":"USDT"},
+        {"id":"dbeff3518432401f90acd569cbbc14e3", "name":"BTC"}
+    ]
+}

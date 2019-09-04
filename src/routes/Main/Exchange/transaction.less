@@ -1,0 +1,108 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.transaction {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 0.875rem;
+  .available {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3125rem 0.625rem;
+    span:last-child {
+      text-align: right;
+    }
+    strong {
+      color: @primary-color;
+      font-weight: normal;
+    }
+  }
+  ul {
+    display: none;
+    margin: 0;
+    padding: 0.625rem;
+    flex: 1 1 auto;
+    &.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.4s linear;
+    }
+    li {
+      position: relative;
+      &:first-child {
+        z-index: 1;
+        margin-bottom: 2.1875rem;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .placeholder {
+        z-index: 3;
+        position: absolute;
+        left: 0.625rem;
+        top: 50%;
+        transition: all 0.2s linear;
+        transform: translateY(-50%);
+        color: darken(@gray-color, 30%);
+      }
+      .text {
+        z-index: 2;
+        position: absolute;
+        top: 50%;
+        right: 0.625rem;
+        transform: translateY(-50%);
+        color: darken(@gray-color, 30%);
+      }
+      .input {
+        z-index: 2;
+        // background-color: darken(@dark-bg-color, 8%) !important;
+        // after modify
+        background-color: @white-color !important;
+      }
+      .input:focus + .placeholder,
+      .placeholder.hasValue {
+        transform: translate3d(0, -150%, 0);
+        font-size: 0.75rem;
+        padding: 0 0.3125rem;
+        // background-color: darken(@dark-bg-color, 8%);
+        // after modify
+        background-color: @white-color;
+      }
+      .transferToCNY {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        margin-top: 1.6875rem;
+        padding: 7px 11px 2px;
+        font-size: 0.75rem;
+        border-radius: @border-radius-base;
+        background-color: lighten(@dark-bg-color, 20%);
+      }
+      button {
+        width: 100%;
+      }
+      .totalCount {
+        text-align: center;
+        padding-bottom: 0.3125rem;
+      }
+      .ghost {
+        width: 100%;
+        line-height: 32px;
+        text-align: center;
+        // border: 1px solid #474772;
+        // after modify
+        border: 1px solid @border-color;
+
+        border-radius: @border-radius-base;
+      }
+      :global {
+        .ant-slider-with-marks {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

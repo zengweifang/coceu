@@ -1,0 +1,45 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../utils/utils.less';
+
+.mask {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 2.5rem;
+    display: flex;
+    margin-bottom: 0;
+    padding: 0.25rem 0;
+    color: #545b73;
+    font-size: 0.875rem;
+    border-bottom: 1px solid rgb(97, 97, 97);
+    justify-content: space-between;
+    li {
+      flex: 1 1 3.75rem;
+      text-align: center;
+      line-height: 2rem;
+      &.active {
+        color: #dadada;
+        // background-color: #3f4a71;
+        //after modify
+        background-color: @dark-bg-color;
+        :global {
+          .ant-dropdown-link {
+            color: #dadada;
+          }
+        }
+      }
+      :global {
+        .ant-dropdown-link {
+          color: #545b73;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,127 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.rankTitle {
+  margin: 3rem 0;
+  text-align: center;
+  color: @dark-color;
+  font-size: 1.5rem;
+  span {
+    padding: 0 10px;
+    font-size: 2rem;
+    color: @primary-color;
+  }
+}
+.rankLogin {
+  text-align: center;
+  margin: 5rem 0 3rem 0;
+}
+.miningRank {
+  background: url(../../../assets/images/rank_bg.svg) -280px -120px no-repeat;
+  background-size: 130% 130%;
+  height: 41.25rem;
+  .rankWrapper {
+    position: relative;
+    padding-top: 2rem;
+    padding-left: 0;
+    width: 31.25rem;
+    .rankList {
+      li {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        margin-top: 1.25rem;
+        color: lighten(@dark-color, 20%);
+        &.rankHeader {
+          margin-bottom: 1rem;
+          color: darken(@white-color, 40%);
+        }
+        span {
+          .textOverflow();
+          &.rank {
+            flex: 0 0 3.125rem;
+            word-break: break-all;
+          }
+          &.username {
+            flex: 0 0 7.5rem;
+            word-break: break-all;
+          }
+          &.realName {
+            flex: 0 0 3.75rem;
+            word-break: break-all;
+          }
+          &.miningCount {
+            flex: 0 0 5rem;
+            overflow: auto;
+            white-space: normal;
+            word-break: break-all;
+          }
+          &:last-child {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+  .deadline {
+    margin-top: 1.25rem;
+    color: @primary-color;
+    font-size: 0.8125rem;
+  }
+  :global {
+    .ant-pagination {
+      margin-top: 2.5rem;
+      text-align: right;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .miningRank {
+    background: none;
+  }
+  .miningRank {
+    width: 100%;
+    .rankWrapper {
+      padding-left: 0;
+      width: 100%;
+      li {
+        .rank {
+          width: 10%;
+          word-break: break-all;
+        }
+        .username {
+          width: 40%;
+          word-break: break-all;
+        }
+        .realName {
+          width: 25%;
+          word-break: break-all;
+        }
+        .miningCount {
+          width: 25%;
+          word-break: break-all;
+        }
+      }
+    }
+    .rankHeader {
+      .rank {
+        width: 10%;
+      }
+      .username {
+        width: 40%;
+      }
+      .realName {
+        width: 25%;
+      }
+      .miningCount {
+        width: 25%;
+      }
+    }
+    :global {
+      .ant-pagination {
+        text-align: center;
+      }
+    }
+  }
+}

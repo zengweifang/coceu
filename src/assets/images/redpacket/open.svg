@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="108px" height="108px" viewBox="0 0 108 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="54" cy="54" r="50"></circle>
+        <filter x="-6.0%" y="-6.0%" width="112.0%" height="112.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.77254902   0 0 0 0 0.28627451   0 0 0 0 0.2  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Oval-6">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <circle stroke="#D3B37C" stroke-width="6" stroke-linejoin="square" fill="#DDBC84" fill-rule="evenodd" cx="54" cy="54" r="47"></circle>
+            <circle stroke="#DDBC84" stroke-width="5" stroke-linejoin="square" cx="54" cy="54" r="47.5"></circle>
+        </g>
+        <path d="M43.52,59.64 L48.84,59.64 L48.84,55.04 L44.6,55.04 L44.6,52.56 L64,52.56 L64,55.04 L60.12,55.04 L60.12,59.64 L65.28,59.64 L65.28,62.2 L60.12,62.2 L60.12,71.4 L57.48,71.4 L57.48,62.2 L51.24,62.2 C51,64.32 50.52,66.12 49.8,67.56 C48.84,69.44 47.2,70.92 44.96,71.96 L43.52,69.68 C45.48,68.72 46.88,67.44 47.68,65.84 C48.12,64.8 48.44,63.56 48.64,62.2 L43.52,62.2 L43.52,59.64 Z M57.48,59.64 L57.48,55.04 L51.44,55.04 L51.44,59.64 L57.48,59.64 Z M40.88,44.4 L40.88,47.32 L49.88,47.32 L49.88,44.4 L40.88,44.4 Z M49.88,42.36 L49.88,39.28 L40.88,39.28 L40.88,42.36 L49.88,42.36 Z M58.84,44.4 L58.84,47.24 L68.08,47.24 L68.08,44.4 L58.84,44.4 Z M68.08,42.36 L68.08,39.36 L58.84,39.36 L58.84,42.36 L68.08,42.36 Z M52.68,37 L52.68,49.64 L40.88,49.64 L40.88,72.16 L38,72.16 L38,37 L52.68,37 Z M68.08,49.52 L56.04,49.52 L56.04,37.04 L70.92,37.04 L70.92,68.04 C70.92,70.68 69.72,72 67.32,72 C65.88,72 64.44,71.96 63,71.88 L62.32,69.32 C63.76,69.4 65.08,69.48 66.28,69.48 C67.48,69.48 68.08,68.68 68.08,67.16 L68.08,49.52 Z" id="開" fill="#3B3B3B"></path>
+    </g>
+</svg>

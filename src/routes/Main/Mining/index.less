@@ -1,0 +1,125 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.mining {
+  .box {
+    position: relative;
+    margin-top: 1.25rem;
+    padding: 2.1875rem 2.5rem;
+    background-color: @white-color;
+    border-radius: @border-radius-base;
+    border: 0.0625rem solid @light-border-color;
+    ul {
+      position: relative;
+      margin-bottom: 0;
+    }
+    strong {
+      font-weight: normal;
+      color: @primary-color;
+    }
+  }
+}
+
+.dashboard {
+  h2 {
+    margin-bottom: 1.25rem;
+    text-align: center;
+    color: @primary-color;
+    font-size: 1rem;
+  }
+  .progress {
+    margin-top: 0.625rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .info {
+    display: flex;
+    margin: 2.5rem;
+    justify-content: space-around;
+    strong {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: normal;
+    }
+    li {
+      text-align: center;
+    }
+  }
+}
+
+.income {
+  // &:before {
+  //   z-index: 0;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 50%;
+  //   height: 100%;
+  //   width: 625rem;
+  //   content: '';
+  //   background-color: @white-color;
+  //   transform: translateX(-50%);
+  // }
+  // * {
+  //   z-index: 1;
+  //   position: relative;
+  // }
+  h2 {
+    padding-left: 0.625rem;
+    font-size: 1.125rem;
+    color: @dark-color;
+    border-left: 2px solid @primary-color;
+  }
+  .attrWrap {
+    border-radius: @border-radius-base;
+    border: 0.0625rem solid @border-color;
+  }
+  .attr {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.25rem;
+    padding: 2.5rem 0;
+    line-height: 2rem;
+    li {
+      text-align: center;
+      span {
+        display: block;
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mining {
+    .box {
+      padding: 1.25rem 0.625rem;
+      strong {
+        color: @primary-color;
+      }
+      .placeholder {
+        width: 100%;
+        line-height: 100px;
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+  }
+  .dashboard {
+    .progress {
+      div {
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
+
+    .info {
+      flex-direction: column;
+      li {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import "~antd/lib/style/themes/default.less";
+@import "../../../../utils/utils.less";
+:global {
+  .account-c2c-wrap {
+    position: relative;
+    .account-c2c-header {
+      padding: 0 2px;
+      background: @table-header-bg;
+    }
+    .ant-tabs-bar{
+      border-bottom: 1px solid #e8e8e8;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  :global {
+    .account-c2c-wrap {
+      padding-top: 2rem;
+    }
+  }
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>wotc 下载</title>
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body,
+    h4,
+    a {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .share {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      position: relative;
+    }
+
+    @font-face {
+      font-family: 'iconfont';
+      /* project id 617853 */
+      src: url('//at.alicdn.com/t/font_617853_jeuflrb5j6g.eot');
+      src: url('//at.alicdn.com/t/font_617853_jeuflrb5j6g.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_617853_jeuflrb5j6g.woff') format('woff'),
+        url('//at.alicdn.com/t/font_617853_jeuflrb5j6g.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_617853_jeuflrb5j6g.svg#iconfont') format('svg');
+    }
+
+    .wechat:before {
+      z-index: 1;
+      content: '请点击右上角,在浏览器中打开页面下载';
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding-top: 110px;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      background-color: rgba(0, 0, 0, .5);
+    }
+
+    .wechat:after {
+      z-index: 2;
+      content: '\e600';
+      position: fixed;
+      top: 0;
+      right: 2%;
+      font-family: iconfont;
+      color: #fff;
+      font-size: 120px;
+      transform: rotate(35deg);
+    }
+
+    .app-name {
+      position: absolute;
+      bottom: 40%;
+      text-align: center;
+      width: 100%;
+    }
+
+    .app-name p {
+      text-align: center;
+      font-size: 40px;
+      color: #4b74d9;
+      font-weight: 600;
+    }
+
+    .share-footer {
+      width: 100%;
+      position: absolute;
+      bottom: 30%;
+      left: 0;
+    }
+
+    .app-icon {
+      text-align: center;
+      margin-top: 20%;
+    }
+    .app-icon img{
+      width: 120px;
+      height: 120px;
+    }
+
+    .share-footer a {
+      display: block;
+      text-decoration: none;
+      width: 80%;
+      height: 50px;
+      margin: 0 auto;
+      border-radius: 4px;
+      text-align: center;
+      line-height: 50px;
+      background: #4b74d9;
+      color: #fff;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="app" v-bind:class="{ share: true, 'wechat': isWechat }">
+    <div class="app-icon">
+      <img alt="" src="./otc-icon.png" />
+    </div>
+    <div class="app-name">
+      <p>wotc</p>
+    </div>
+    <div class="share-footer">
+      <a :href="inviteLink">立即安装</a>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+
+
+  //判断是否是微信浏览器的函数
+  function isWechat() {
+    //window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+    var ua = window.navigator.userAgent.toLowerCase();
+    //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function ismobile() {
+    var agent = navigator.userAgent;
+    if (/AppleWebKit.*Mobile/i.test(agent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(agent))) {
+      if (window.location.href.indexOf("?mobile") < 0) {
+        try {
+          if (/iPhone|mac|iPod|iPad/i.test(agent)) {
+            return '0';
+          } else {
+            return '1';
+          }
+        } catch (e) { }
+      }
+    } else if (agent.indexOf('iPad') > -1) {
+      return '0';
+    } else {
+      return '1';
+    }
+  };
+  var androidUrl = "https://wotc.oss-cn-shenzhen.aliyuncs.com/wotc.apk";
+  var iosUrl = 'itms-services:///?action=download-manifest&url=https://wotc.oss-cn-shenzhen.aliyuncs.com/wotc.plist';
+  var inviteLink = androidUrl;
+  var pla = ismobile();
+  if (pla == 1) {
+    //安卓
+    inviteLink = androidUrl;
+  } else {
+    //ios
+    inviteLink = iosUrl;
+  }
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      isWechat: isWechat(),
+      inviteLink: inviteLink,
+    }
+
+  })
+</script>
+
+</html>

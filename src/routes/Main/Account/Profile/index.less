@@ -1,0 +1,47 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.profile {
+  .category {
+    margin-bottom: 1.25rem;
+    border-radius: @border-radius-base;
+    border: 0.0625rem solid @light-border-color;
+    background-color: @white-color;
+    h3 {
+      position: relative;
+      padding: 0 1.25rem;
+      font-size: 1rem;
+      line-height: 2.5rem;
+      background-color: @light-border-color;
+      border-bottom: 0.0625rem solid @light-border-color;
+      background-color: @table-header-bg;
+      a {
+        position: absolute;
+        right: 0;
+        padding: 0 20px;
+        font-size: 0.75rem;
+      }
+    }
+    dl {
+      margin: 0;
+      padding: 0 1.25rem;
+      font-size: 1rem;
+      line-height: 2;
+      dt {
+        float: left;
+        min-width: 10rem;
+        padding: 0.625rem 0;
+        font-weight: normal;
+        color: lighten(@dark-color, 70%);
+      }
+      dd {
+        margin: 0;
+        padding: 0.625rem 0;
+        border-bottom: 0.0625rem solid @border-color;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

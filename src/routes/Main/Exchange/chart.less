@@ -1,0 +1,89 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 1.875rem;
+    animation: fadeIn 0.4s linear;
+    .description {
+      flex: 1 1 26rem;
+      line-height: 1.8;
+      span {
+        display: block;
+        margin-bottom: 0.3125rem;
+        font-size: 1rem;
+        // color: darken(@gray-color, 25%);
+        // after modify
+        color: @dark-color;
+      }
+      h2 {
+        // color: @gray-color;
+        // after modify
+        color: @dark-color;
+        font-weight: normal;
+        font-size: 0.875rem;
+        padding-bottom: 1rem;
+        // border-bottom: 0.0625rem solid @dark-bg-color;
+        // after modify
+        border-bottom: 0.0625rem solid @border-color;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+      p {
+        padding-top: 0.625rem;
+        font-size: 0.875rem;
+      }
+    }
+    .attributes {
+      flex: 1 1 50rem;
+      padding-left: 10%;
+      li {
+        line-height: 3rem;
+        font-size: 0.875rem;
+        // border-bottom: 0.0625rem solid @dark-bg-color;
+        // after modify
+        border-bottom: 0.0625rem solid @border-color;
+        span {
+          display: inline-block;
+          width: 14.375rem;
+          // color: darken(@gray-color, 25%);
+          // after modify
+          border-bottom: @dark-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .chart {
+    .detail {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 0.625rem;
+      .description {
+        flex: 1 1 auto;
+      }
+      .attributes {
+        flex: 1 1 auto;
+        padding-left: 0;
+        li {
+          text-align: right;
+          span {
+            float: left;
+            display: block;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}

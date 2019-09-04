@@ -1,0 +1,504 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+.c2c {
+  background: @white-color;
+  .coinWrap {
+    position: relative;
+    margin: 3rem 0 2rem 0;
+    .pcHeader {
+      display: flex;
+      margin-bottom: 0;
+      li {
+        margin-right: 2.5rem;
+        h4 {
+          margin-bottom: 1.5rem;
+          font-weight: 600;
+        }
+        i {
+          font-size: 1.5rem;
+          position: relative;
+          top: 0.25rem;
+          margin-right: 0.25rem;
+        }
+        div {
+          display: flex;
+        }
+      }
+      .sell {
+        padding-left: 4rem;
+        border-left: 1px solid darken(@white-color, 8%);
+      }
+      .coinItem {
+        display: block;
+        padding: 0 2rem 0 0;
+        font-weight: 600;
+        font-size: 1.125rem;
+        div {
+          cursor: pointer;
+          display: block;
+          height: 100%;
+        }
+      }
+      .coinActive {
+        color: @primary-color;
+        div {
+          border-bottom: 2px solid @primary-color;
+        }
+      }
+    }
+    .publish {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      text-align: right;
+      .btnWrap{
+        margin-top: 1rem;
+        button {
+          margin-left: 1.25rem;
+          border: 1px solid @primary-color;
+          color: @primary-color;
+          &:hover{
+            background: @primary-1;
+          }
+        }
+      }
+    }
+    .mobileHeader {
+      display: none;
+    }
+  }
+  .advertWrap {
+    border-radius: 4px;
+    .advertHeader {
+      display: flex;
+      justify-content: space-between;
+      height: 3.125rem;
+      line-height: 3.125rem;
+      border-bottom: 1px solid @table-header-bg;
+      border-radius: 4px 4px 0 0;
+      span {
+        flex: 1;
+        text-align: center;
+        font-size: 14px;
+        color: #999999;
+      }
+      .realName {
+        text-align: left;
+      }
+      .volume {
+        padding-left: 0.5rem;
+      }
+      .operate {
+        box-sizing: border-box;
+        text-align: right;
+      }
+    }
+    .adDivide {
+      height: 0.625rem;
+      background: @body-background;
+    }
+    .pageWrap {
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .advertList {
+      border-radius: 0.25rem;
+      li {
+        position: relative;
+        height: 3.75rem;
+        line-height: 3.75rem;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid darken(@white-color, 6%);
+        &:hover {
+          border-bottom: 1px solid darken(@white-color, 12%);
+        }
+        > span {
+          flex: 1;
+          text-align: center;
+          display: block;
+        }
+        .mTitle {
+          display: none;
+        }
+        .payStyle {
+          .iconCard {
+            color: #d68d16;
+            font-size: 1.2rem;
+            width: 1.5rem;
+            display: inline-block;
+          }
+          .iconZhi {
+            color: #43a1ed;
+            font-size: 1rem;
+            position: relative;
+            top: -0.125rem;
+            margin-left: 2px;
+            width: 1.5rem;
+            display: inline-block;
+          }
+          .iconWei {
+            color: #44b500;
+            font-size: 1.2rem;
+            margin-left: 2px;
+            width: 1.5rem;
+            display: inline-block;
+          }
+        }
+        .realName {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          padding-left: 0.5rem;
+          > div {
+            font-size: 13px;
+            width: 2.25rem;
+            height: 2.25rem;
+            line-height: 2.25rem;
+            border-radius: 50%;
+            color: #fff;
+          }
+          .real0 {
+            background: #5d8cc2;
+          }
+          .real1 {
+            background: #8f5aad;
+          }
+          .real2 {
+            background: #6d78a8;
+          }
+          .real3 {
+            background: #a2b240;
+          }
+          .real4 {
+            background: #b09472;
+          }
+          .real5 {
+            background: #61b88e;
+          }
+          .real6 {
+            background: #e35744;
+          }
+          .real7 {
+            background: #a16c92;
+          }
+          .real8 {
+            background: #7692ab;
+          }
+          .real9 {
+            background: #66756e;
+          }
+        }
+        .operate {
+          color: @primary-color;
+          cursor: pointer;
+          text-align: right;
+          button {
+            border: 1px solid @primary-color;
+            color: @primary-color;
+            font-size: 0.75rem;
+            font-weight: 600;
+            height: 1.875rem;
+            &:hover {
+              background: @primary-1;
+            }
+          }
+        }
+        .priceLine {
+          span {
+            color: @primary-color;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+  .userOrderWrap {
+    background: @body-background;
+    position: relative;
+    .userOrderMask {
+      position: absolute;
+      top: 2.7rem;
+      left: 0;
+      width: 100%;
+      padding: 4rem 0;
+      background: @body-background;
+      text-align: center;
+    }
+  }
+}
+
+:global {
+  .c2c-wrap {
+    .ant-table table {
+      background: @white-color !important;
+    }
+    .ant-table-placeholder {
+      background: @white-color !important;
+    }
+    .m-c2c-header {
+      .ant-radio-button-wrapper {
+        height: 2.5rem !important;
+        line-height: 2.5rem;
+        width: 7.5rem;
+      }
+    }
+    .c2c-page-wrap {
+      padding: 0 0 1rem 0;
+      .ant-pagination-item {
+        line-height: 32px !important;
+      }
+    }
+    .c2c-setting {
+      text-align: right;
+      margin-top: 1rem;
+    }
+  }
+  .c2c-container-wrap {
+    background: @body-background;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    position: relative;
+    // after modify
+    border-top: 1px solid #f4f4f4;
+  }
+  .c2c-container {
+    position: relative;
+    width: @wrapper-width;
+    margin: 0 auto;
+    .clearfix();
+  }
+}
+
+/* 黑色主题 */
+:global {
+  .dark {
+    .c2c-wrap {
+      .c2c-dark {
+        // background: darken(@dark-bg-color, 3%);
+        // color: @gray-color;
+        // after modify
+        background: @dark-color;
+      }
+      .container-dark {
+        // background: @dark-bg-color !important;
+        // after modify
+        background: @dark-color !important;
+      }
+      .sell-dark {
+        border-left: 1px solid lighten(@dark-color, 30%) !important;
+      }
+      .order-mask-dark {
+        // background: @dark-bg-color !important;
+        // after modify
+        background: @dark-color !important;
+      }
+      .text-dark {
+        // color: @gray-color;
+        // after modify
+        color: @dark-color-9;
+      }
+      .btn-dark {
+        // background: @dark-bg-color !important;
+        // after modify
+        background: @dark-color !important;
+        i {
+          // color: @gray-color;
+          // after modify
+          color: @dark-color-9;
+        }
+      }
+      .radio-btn-dark{
+        // background: @dark-bg-color !important;
+        // color: @primary-color !important;
+        // after modify
+        background: @dark-color !important;
+        color: @dark-color-9;
+      }
+      .c2c-my-title-dark {
+        // color: @gray-color;
+        // after modify
+        color: @dark-color-9;
+      }
+      .header-dark {
+        border-bottom: 1px solid lighten(@dark-color, 25%) !important;
+      }
+      .item-dark {
+        border-bottom: 1px solid lighten(@dark-color, 25%) !important;
+        // color: @gray-color;
+        // after modify
+        color: @dark-color-9;
+        &:hover {
+          border-bottom: 1px solid lighten(@dark-color, 40%) !important;
+        }
+      }
+      .ant-tabs-nav-wrap {
+        // background: @dark-bg-color !important;
+        // after modify
+        background: @dark-color !important;
+      }
+      .ant-pagination-item-ellipsis{
+        // color: darken(@white-color, 20%);
+        // after modify
+        color: @dark-color-9;
+      }
+      .c2c-container-wrap {
+        // background: @dark-bg-color;
+        // after modify
+        background: @dark-color;
+        border-top: 1px solid #737373;
+        .ant-tabs {
+          // background: @dark-bg-color;
+          // after modify
+          background: @dark-color;
+        }
+        .ant-tabs-content {
+          // background: @dark-bg-color;
+          // after modify
+          background: @dark-color;
+        }
+        .ant-tabs-tabpane {
+          // background: @dark-bg-color;
+          // after modify
+          background: @dark-color;
+        }
+      }
+
+      .ant-select-selection {
+        // background: darken(@dark-bg-color, 3%);
+        // after modify
+        background: @dark-color;
+
+        border: 1px solid darken(@white-color, 20%);
+        // color: darken(@white-color, 20%);
+        // after modify
+        color: @dark-color-9;
+        .ant-select-arrow::before {
+          // color: darken(@white-color, 20%);
+          // after modify
+          color: @dark-color-9;
+        }
+        .ant-select-arrow i{
+          // color: darken(@white-color, 20%);
+          // after modify
+          color: @dark-color-9;
+        }
+      }
+    }
+  }
+  .c2c-my-select-dark {
+    .ant-select-dropdown-menu-item {
+      // background-color: darken(@dark-bg-color, 3%) !important;
+      // color: @gray-color !important;
+      // after modify
+      background: @dark-color !important;
+      color: @dark-color-9;
+      
+      &:hover {
+        // background-color: @primary-5 !important;
+        // after modify
+        background: @dark-color !important;
+      }
+    }
+    .ant-select-dropdown-menu-item-selected {
+      // background-color: @primary-color !important;
+      // after modify
+      background: @dark-color !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  :global {
+    .c2c-container {
+      width: 100%;
+      padding: 0 @mobile-space;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .c2c {
+    .coinWrap {
+      position: relative;
+      margin: 1rem 0 1rem 0;
+      .pcHeader {
+        display: none;
+      }
+      .publish {
+        padding: 1rem 1rem 0;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+      }
+      .mobileHeader {
+        display: block;
+        .mNav {
+          text-align: center;
+        }
+        .mCoinList {
+          margin-top: 1rem;
+          padding: 0 1rem;
+        }
+        .mCoinItem {
+          height: 2.5rem;
+          line-height: 2.5rem;
+          cursor: pointer;
+          padding: 0 1rem;
+          display: inline-block;
+        }
+        .mCoinActive {
+          color: @primary-color;
+          border-bottom: 2px solid @primary-color;
+        }
+      }
+    }
+    .advertWrap {
+      .advertHeader {
+        display: none;
+      }
+      .advertList {
+        li {
+          padding: 1rem 1rem 0.5rem;
+          height: 10rem;
+          line-height: 1.2rem;
+          display: flex;
+          flex-wrap: wrap;
+          .mTitle {
+            display: inline-block;
+            padding-right: 0.2rem;
+          }
+          > span {
+            width: 50%;
+            flex: auto;
+            text-align: left;
+          }
+          .totalPrice {
+            margin-top: 0.375rem;
+          }
+          .operate {
+            text-align: left;
+          }
+          .priceLine {
+            padding-top: 0.375rem;
+          }
+          .realName {
+            width: 100%;
+            padding-left: 0;
+            justify-content: flex-start;
+            > div {
+              text-align: center;
+              position: relative;
+              top: -0.375rem;
+            }
+          }
+          .payStyle {
+            position: absolute;
+            right: 0;
+            top: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": [
+        {
+            "id" : "1120510965360963584", 
+            "name": "USDT", 
+            "userId": "1115079958210584576", 
+            "coinBalance": 1457.725,
+            "dayRate": "",
+            "referId": "",
+            "rise": "",
+            "yesterdayIncome": "999.9988989",
+            "yesterdayReward": "",
+            "teamLevel": "V2",
+            "accumulIncome": "9999.9988989",
+            "teamAmount": "9999",
+            "positionName": "5555",
+            "accumulReward": "6666",
+            "validNum": "777",
+            "teamCommunityAmount": "989898",
+            "oneInvite": "9"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "code": 10000000,
+    "msg":null,
+    "data": {
+        "count":"15",
+        "list":[
+            {"id":"xxx1", "userId":"xxxx1","createStr":"2019-05-2412:05:10","rewardType":"1","detailReward":124.22},
+            {"id":"xxx2", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"2","detailReward":124.22},
+            {"id":"xxx3", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"3","detailReward":124.22},
+            {"id":"xxx4", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"4","detailReward":124.22},
+            {"id":"xxx5", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"5","detailReward":124.22},
+            {"id":"xxx6", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"1","detailReward":124.22},
+            {"id":"xxx7", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"2","detailReward":124.22},
+            {"id":"xxx8", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"3","detailReward":124.22},
+            {"id":"xxx9", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"4","detailReward":124.22},
+            {"id":"xxx10", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"5","detailReward":124.22},
+            {"id":"xxx11", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"1","detailReward":124.22},
+            {"id":"xxx12", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"2","detailReward":124.22},
+            {"id":"xxx13", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"3","detailReward":124.22},
+            {"id":"xxx14", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"4","detailReward":124.22},
+            {"id":"xxx15", "userId":"xxxx1","createStr":"2019-05-25 12:05:10","rewardType":"5","detailReward":124.22}
+        ]
+     }
+}

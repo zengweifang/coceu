@@ -1,0 +1,34 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../utils/utils.less';
+
+.wrap {
+  width: 27rem;
+  margin: 5rem auto;
+  .text {
+    color: lighten(@dark-color, 60%);
+  }
+  button {
+    width: 100%;
+  }
+}
+
+.title {
+  height: 16px;
+  position: relative;
+  top: -14px;
+  padding-left: 6px;
+}
+
+@media screen and (max-width: 767px) {
+  .wrap {
+    width: auto;
+    margin: 5rem 1.125rem;
+  }
+  :global {
+    .mobile {
+      .ant-form {
+        margin: 1.25rem;
+      }
+    }
+  }
+}

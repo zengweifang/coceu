@@ -1,0 +1,49 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.recharge {
+  padding-left: 1.25rem;
+  .rechargeAccount {
+    margin-bottom: 0.25rem;
+    span {
+      color: @primary-color;
+      margin-left: 1rem;
+    }
+  }
+  .address {
+    margin-top: 0.625rem;
+    .clearfix();
+    li {
+      float: left;
+      margin: 0.3125rem 0.625rem 0.3125rem 0;
+    }
+    .copy {
+      color: @primary-color;
+      cursor: pointer;
+    }
+  }
+  .reAddress {
+    min-width: 18.75rem;
+    min-height: 1.5625rem;
+    color: @primary-color;
+  }
+  h4 {
+    font-size: 1rem;
+  }
+  .qrcode {
+    position: relative;
+    .text {
+      cursor: pointer;
+    }
+    .qrcon {
+      position: absolute;
+      top: 2.1875rem;
+      left: 50%;
+      border: 0.0625rem solid #666;
+      padding: 0.625rem;
+      background: #fff;
+      border-radius: 0.25rem;
+      transform: translateX(-50%);
+    }
+  }
+}

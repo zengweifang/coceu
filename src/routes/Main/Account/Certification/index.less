@@ -1,0 +1,81 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.certification {
+  .user {
+    display: flex;
+    .active {
+      background-color: @primary-color;
+    }
+    .status {
+      width: 320px;
+      margin-left: 1.875rem;
+      margin-right: 2.5rem;
+      .info {
+        i {
+          padding: 0 0.3125rem 0 0.625rem;
+          color: @primary-color;
+        }
+        div {
+          margin-left: 0.625rem;
+        }
+      }
+      button {
+        margin-top: 0.5rem;
+        margin-right: 0.625rem;
+      }
+    }
+    .level {
+      width: 31.25rem;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+      }
+      :global {
+        .ant-steps {
+          padding: 0 1.875rem;
+          .icon-masonry {
+            font-size: 1.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .certification {
+    .user {
+      display: flex;
+      flex-direction: column;
+      .status {
+        margin-top: -3.75rem;
+        margin-left: 6.25rem;
+      }
+      .level {
+        width: 100%;
+        margin-top: 2.5rem;
+        margin-left: 0;
+        ul {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.875rem;
+          li {
+            width: 5.625rem;
+            &:last-child {
+              text-align: right;
+            }
+          }
+        }
+        :global {
+          .ant-steps {
+            display: flex;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

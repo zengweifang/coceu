@@ -1,0 +1,93 @@
+@import '~antd/lib/style/themes/default.less';
+@import '../../../../utils/utils.less';
+
+.invite {
+  .box {
+    margin-bottom: 1.25rem;
+    .title {
+      color: @dark-color;
+      font-size: 1rem;
+      .count {
+        color: @primary-color;
+        padding: 0 0.25rem;
+      }
+    }
+    .cont {
+      display: flex;
+      .code {
+        margin-right: 2.5rem;
+      }
+      .action {
+        flex: 0 1 31.25rem;
+        li {
+          margin-bottom: 1.875rem;
+        }
+      }
+      .text {
+        font-size: 0.75rem;
+        text-align: center;
+      }
+    }
+    :global {
+      .ant-input-group-addon {
+        cursor: pointer;
+        width: 8.75rem;
+      }
+      .ant-input-group-addon > span {
+        display: block;
+        line-height: 2.375rem;
+        margin: 0 -0.6875rem;
+        padding: 0 0.6875rem;
+      }
+    }
+  }
+}
+
+.inviteQrcode {
+  .qrcode {
+    border: 1px solid #dadada;
+  }
+  :global {
+    .ant-modal-close-x {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .invite {
+    .box {
+      margin-bottom: 0;
+      .cont {
+        flex-direction: column;
+        .code {
+          margin-top: 1.25rem;
+          margin-right: 0;
+          text-align: center;
+        }
+        .action {
+          flex: auto;
+          margin-top: 1.875rem;
+          li {
+            margin-bottom: 1.25rem;
+          }
+        }
+      }
+    }
+  }
+
+  .inviteQrcode {
+    .qrcode {
+      margin: 0.3125rem;
+    }
+    :global {
+      .ant-modal-close-x {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+      }
+    }
+  }
+}
