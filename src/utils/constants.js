@@ -35,4 +35,5 @@ export const IM_PREFIX = `${protocol.replace('http', 'ws')}//${host}/biao/im`;
 console.log(WS_PREFIX, IM_PREFIX);
 
 //阿里 滑动验证 appKey
-export const appKey = 'FFFF0N00000000006AD1';
+// export const appKey = 'FFFF0N00000000006AD1';
+export const appKey = 'FFFF0N000000000081D7';

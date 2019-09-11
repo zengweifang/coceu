@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { Link } from 'dva/router';
 import { Form, Input, Checkbox, Button, Modal, Icon, message } from 'antd';
-// import NoCaptcha from 'components/NoCaptcha';
+import NoCaptcha from 'components/NoCaptcha';
 import { MOBILE_REGEX, PWD_REGEX, appKey } from 'utils/constants.js';
 import { isPC, getQueryString } from 'utils';
 import request from 'utils/request';
@@ -87,8 +87,8 @@ class Mobile extends PureComponent {
 
   sendMobileCode = () => {
     const { localization } = this.props;
-    // const { token, ncData, scene } = this.state;
-    // const { csessionid, sig } = ncData;
+    const { token, ncData, scene } = this.state;
+    const { csessionid, sig } = ncData;
     const mobile = this.props.form.getFieldsValue().mobile;
     request('/user/vaildCode/numRandom',{
       method: 'GET'
@@ -104,11 +104,11 @@ class Mobile extends PureComponent {
             mobile,
             type: 'register',
             source: 'pc',
-            // appKey,
-            // sessionId: csessionid,
-            // sig,
-            // vtoken: token,
-            // scene
+            appKey,
+            sessionId: csessionid,
+            sig,
+            vtoken: token,
+            scene,
             vaildCodeKey: vaildCodeKey
           }
         }).then(json => {
@@ -178,10 +178,16 @@ class Mobile extends PureComponent {
     callback();
   };
 
+  inputValue = e => {
+    this.setState({
+      mobile: e.target.value
+    })
+  };
+
   render() {
     const { localization, form, history } = this.props;
     const { getFieldDecorator } = form;
-    const { disabled, number, inviteCode, scene, popupVisible } = this.state;
+    const { disabled, number, inviteCode, scene, popupVisible, ncData, mobile } = this.state;
     return (
       <Fragment>
         <Form onSubmit={this.handleSubmit}>
@@ -197,9 +203,9 @@ class Mobile extends PureComponent {
                 }
               ],
               validateTrigger: 'onBlur'
-            })(<Input size="large" />)}
+            })(<Input size="large" id="mobile" onChange={this.inputValue} />)}
           </FormItem>
-          {/* <FormItem>
+          <FormItem>
             <div className={styles.title}>{localization['滑动验证']}</div>
             {getFieldDecorator('noCaptche')(
               <NoCaptcha
@@ -210,7 +216,7 @@ class Mobile extends PureComponent {
                 }}
               />
             )}
-          </FormItem> */}
+          </FormItem>
           <FormItem className={styles.codeForm}>
             <div className={styles.title}>{localization['手机验证码']}</div>
             {getFieldDecorator('code', {
@@ -228,7 +234,7 @@ class Mobile extends PureComponent {
                 <Button
                   type="primary"
                   size="large"
-                  disabled={disabled}
+                  disabled={disabled || !ncData || !mobile }
                   onClick={this.getMobileCode}
                 >
                   {!disabled ? localization['获取验证码'] : number + 'S'}
