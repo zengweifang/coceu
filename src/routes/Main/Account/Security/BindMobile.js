@@ -6,13 +6,19 @@ import { setLocalStorage } from 'utils';
 import request from 'utils/request';
 import JSEncrypt from 'utils/jsencrypt.js';
 import { PUBLI_KEY} from 'utils/constants';
+import NoCaptcha from 'components/NoCaptcha';
+import { isPC } from 'utils';
+import { appKey } from 'utils/constants.js';
 
 const FormItem = Form.Item;
 
 class BindMobile extends PureComponent {
   state = {
     number: 59,
-    disabled: false
+    disabled: false,
+    scene: isPC() ? 'nc_register' : 'nc_register_h5',
+    ncData:'',
+    token:''
   };
 
   componentWillUnmount() {
@@ -21,6 +27,8 @@ class BindMobile extends PureComponent {
 
   //获取手机短信码
   sendMobileSms = mobile => {
+    const { token, ncData, scene } = this.state;
+    const { csessionid, sig } = ncData;
     request('/user/vaildCode/numRandom',{
       method: 'GET'
     }).then(res => {
@@ -30,7 +38,17 @@ class BindMobile extends PureComponent {
         let encrypt = new JSEncrypt();
         encrypt.setPublicKey(PUBLI_KEY);
         let vaildCodeKey = encrypt.encrypt(key);
-        request('/user/sendMobileSms', { body: { mobile,vaildCodeKey } });
+        request('/user/sendMobileSms', { body: 
+          { 
+            mobile,
+            vaildCodeKey,
+            appKey,
+            sessionId: csessionid,
+            sig,
+            vtoken: token,
+            scene
+          } 
+        });
       }
     });
     
@@ -92,6 +110,18 @@ class BindMobile extends PureComponent {
     });
   };
 
+  //滑动验证
+  ncLoaded = (appKey, token, ncData, nc) => {
+    if (ncData) {
+      this.setState({ token, ncData, nc });
+      this.props.form.setFields({
+        noCaptche: {
+          errors: null
+        }
+      });
+    }
+  };
+
   render() {
     const { localization, viewport, form } = this.props;
     const { getFieldDecorator } = form;
@@ -116,10 +146,22 @@ class BindMobile extends PureComponent {
       };
     }
 
-    const { disabled, number } = this.state;
+    const { disabled, number, scene, ncData } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        <FormItem  {...formItemLayout} label={localization['滑动验证']}>
+            {/* <div>{localization['滑动验证']}</div> */}
+            {getFieldDecorator('noCaptche')(
+              <NoCaptcha
+                domID="nc_register_mobile"
+                scene={scene}
+                ncCallback={(appKey, token, ncData, nc) => {
+                  this.ncLoaded(appKey, token, ncData, nc);
+                }}
+              />
+            )}
+          </FormItem>
         <FormItem {...formItemLayout} label={localization['手机号']}>
           {getFieldDecorator('mobile', {
             rules: [
@@ -130,7 +172,7 @@ class BindMobile extends PureComponent {
           })(
             <div className="form-code">
               <Input size="large" />
-              <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled}>
+              <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled || !ncData}>
                 {!disabled ? localization['获取验证码'] : number + 's'}
               </Button>
             </div>
