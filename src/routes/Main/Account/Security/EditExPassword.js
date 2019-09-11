@@ -7,6 +7,9 @@ import request from 'utils/request';
 import { setLocalStorage, encryptPassword, encryptExPassword } from 'utils';
 import JSEncrypt from 'utils/jsencrypt.js';
 // import { getLocalStorage } from 'utils';
+import NoCaptcha from 'components/NoCaptcha';
+import { isPC } from 'utils';
+import { appKey } from 'utils/constants.js';
 
 const FormItem = Form.Item;
 // const account = getLocalStorage('account') || {};
@@ -16,7 +19,11 @@ class EditExPassword extends PureComponent {
   state = {
     confirmDirty: false,
     disabled: false,
-    number: 59
+    number: 59,
+    scene: isPC() ? 'nc_register' : 'nc_register_h5',
+    ncData:'',
+    password:'',
+    password_again: ''
   };
   
 
@@ -134,6 +141,8 @@ class EditExPassword extends PureComponent {
   //发送手机短信
   sendMobileSms = () => {
     const { localization } = this.props;
+    const { token, ncData, scene } = this.state;
+    const { csessionid, sig } = ncData;
     request('/user/vaildCode/numRandom',{
       method: 'GET'
     }).then(res => {
@@ -147,7 +156,12 @@ class EditExPassword extends PureComponent {
           method: 'POST',
           body: {
             smsType: 'ex_password',
-            vaildCodeKey: vaildCodeKey
+            vaildCodeKey: vaildCodeKey,
+            appKey,
+            sessionId: csessionid,
+            sig,
+            vtoken: token,
+            scene
           }
         }).then(json => {
           if (json.code === 10000000) {
@@ -156,6 +170,31 @@ class EditExPassword extends PureComponent {
         });
       }
     });
+  };
+
+  //滑动验证
+  ncLoaded = (appKey, token, ncData, nc) => {
+    console.log(ncData);
+    if (ncData) {
+      this.setState({ token, ncData, nc, ncData1:ncData});
+      this.props.form.setFields({
+        noCaptche: {
+          errors: null
+        }
+      });
+    }
+  };
+
+  inputValue = e => {
+    this.setState({
+      password: e.target.value
+    })
+  };
+
+  inputValueAgain = e => {
+    this.setState({
+      password_again: e.target.value
+    })
   };
 
   render() {
@@ -182,7 +221,7 @@ class EditExPassword extends PureComponent {
       };
     }
 
-    const { disabled, number } = this.state;
+    const { disabled, number, scene, password_again, password, ncData } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -198,7 +237,7 @@ class EditExPassword extends PureComponent {
               { validator: this.validateToNextPassword }
             ],
             validateTrigger: 'onBlur'
-          })(<Input size="large" type="password" placeholder={localization['输入6位数字']} />)}
+          })(<Input size="large" type="password" placeholder={localization['输入6位数字']} id="password" onChange={this.inputValue} />)}
         </FormItem>
         <FormItem {...formItemLayout} label={localization['确认资金密码']}>
           {getFieldDecorator('confirm', {
@@ -213,6 +252,7 @@ class EditExPassword extends PureComponent {
               type="password"
               placeholder={localization['输入6位数字']}
               onBlur={this.handleConfirmBlur}
+              id="password_again" onChange={this.inputValueAgain}
             />
           )}
         </FormItem>
@@ -228,25 +268,38 @@ class EditExPassword extends PureComponent {
             validateTrigger: 'onBlur'
           })(<Input size="large" type="password" placeholder={localization['请输入登录密码']} />)}
         </FormItem> */}
-
         {
           account.mobile ? 
+          <div>
+            <FormItem  {...formItemLayout} label={localization['滑动验证']}>
+            {/* <div>{localization['滑动验证']}</div> */}
+            {getFieldDecorator('noCaptche')(
+              <NoCaptcha
+                domID="nc_register_mobile"
+                scene={scene}
+                ncCallback={(appKey, token, ncData, nc) => {
+                  this.ncLoaded(appKey, token, ncData, nc);
+                }}
+              />
+            )}
+          </FormItem>
           <FormItem {...formItemLayout} label={localization['短信验证码']} className="code-row">
-          {getFieldDecorator('code', {
-            rules: [
-              { required: true, message: localization['请输入手机验证码'] },
-              { pattern: /^\d{6}$/, message: localization['请输入6位数字验证码'] }
-            ],
-            validateTrigger: 'onBlur'
-          })(
-            <div className="form-code">
-              <Input size="large" placeholder={localization['短信验证码']} />
-              <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled}>
-                {!disabled ? localization['获取验证码'] : number + 's'}
-              </Button>
-            </div>
-          )}
-        </FormItem>
+            {getFieldDecorator('code', {
+              rules: [
+                { required: true, message: localization['请输入手机验证码'] },
+                { pattern: /^\d{6}$/, message: localization['请输入6位数字验证码'] }
+              ],
+              validateTrigger: 'onBlur'
+            })(
+              <div className="form-code">
+                <Input size="large" placeholder={localization['短信验证码']} />
+                <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled || !password || !password_again || !ncData}>
+                  {!disabled ? localization['获取验证码'] : number + 's'}
+                </Button>
+              </div>
+            )}
+          </FormItem>
+          </div>
         :
           <FormItem {...formItemLayout} label={localization['邮箱验证码']}>
             {getFieldDecorator('code', {
@@ -260,7 +313,7 @@ class EditExPassword extends PureComponent {
               validateTrigger: 'onBlur'
             })(
               <div className="form-code">
-                <Input size="large" />
+                <Input size="large"/>
                 <Button onClick={this.getMailCode} type="primary" size="large" disabled={disabled}>
                   {!disabled ? localization['获取验证码'] : number + 's'}
                 </Button>

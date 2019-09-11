@@ -90,7 +90,7 @@ class ModifyMobile extends PureComponent {
     const { localization, account } = this.props;
     const { mobile } = account;
     if (MOBILE_REGEX.test(mobile)) {
-      this.sendMobileSms(mobile,'old');
+      this.sendMobileSms(mobile);
       this.countDown();
     } else {
       message.info(localization['请输入正确的手机号']);
@@ -101,7 +101,7 @@ class ModifyMobile extends PureComponent {
     const { localization, form } = this.props;
     const newMobile = form.getFieldValue('newMobile');
     if (MOBILE_REGEX.test(newMobile)) {
-      this.sendMobileSms(newMobile,'new');
+      this.sendMobileSms(newMobile);
       this.newcountDown();
     } else {
       message.info(localization['请输入正确的手机号']);
