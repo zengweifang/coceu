@@ -4,6 +4,9 @@ import request from 'utils/request';
 import { getLocalStorage } from 'utils';
 import JSEncrypt from 'utils/jsencrypt.js';
 import { PUBLI_KEY } from 'utils/constants';
+import NoCaptcha from 'components/NoCaptcha';
+import { isPC } from 'utils';
+import { appKey } from 'utils/constants.js';
 
 const FormItem = Form.Item;
 
@@ -15,7 +18,9 @@ class Validate extends Component {
     this.state = {
       googleCode: '',
       number: 59,
-      disabled: false
+      disabled: false,
+      scene: isPC() ? 'nc_register' : 'nc_register_h5',
+      ncData:''
     };
   }
 
@@ -54,6 +59,8 @@ class Validate extends Component {
   //发送手机短信
   sendMobileSms = () => {
     const { localization } = this.props;
+    const { token, ncData, scene } = this.state;
+    const { csessionid, sig } = ncData;
     request('/user/vaildCode/numRandom',{
       method: 'GET'
     }).then(res => {
@@ -67,7 +74,12 @@ class Validate extends Component {
           method: 'POST',
           body: {
             smsType: 'ex_mobile',
-            vaildCodeKey:vaildCodeKey
+            vaildCodeKey:vaildCodeKey,
+            appKey,
+            sessionId: csessionid,
+            sig,
+            vtoken: token,
+            scene
           }
         }).then(json => {
           if (json.code === 10000000) {
@@ -154,11 +166,24 @@ class Validate extends Component {
     }
   };
 
+  //滑动验证
+  ncLoaded = (appKey, token, ncData, nc) => {
+    console.log(ncData);
+    if (ncData) {
+      this.setState({ token, ncData, nc, ncData1:ncData});
+      this.props.form.setFields({
+        noCaptche: {
+          errors: null
+        }
+      });
+    }
+  };
+
   render() {
     const { localization, form, viewport } = this.props;
     const { getFieldDecorator } = form;
 
-    const { disabled, number } = this.state;
+    const { disabled, number, scene, ncData } = this.state;
 
     let formItemLayout = {};
 
@@ -188,25 +213,41 @@ class Validate extends Component {
         <div style={{ marginTop: 20 }}>
         <Form>
           {
-            account.mobile ? <FormItem {...formItemLayout} label={localization['短信验证码']}>
-            {getFieldDecorator('code', {
-              rules: [
-                { required: true, message: localization['请输入手机验证码'] },
-                {
-                  pattern: /^\d{6}$/,
-                  message:  localization['请输入6位数字验证码']
-                }
-              ],
-              validateTrigger: 'onBlur'
-            })(
-            <div className="form-code">
-              <Input size="large" placeholder={localization['短信验证码']} />
-              <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled}>
-                {!disabled ? localization['获取验证码'] : number + 's'}
-              </Button>
+            account.mobile ? 
+            <div>
+              <FormItem  {...formItemLayout} label={localization['滑动验证']}>
+                {/* <div>{localization['滑动验证']}</div> */}
+                {getFieldDecorator('noCaptche')(
+                  <NoCaptcha
+                    domID="nc_register_mobile"
+                    scene={scene}
+                    ncCallback={(appKey, token, ncData, nc) => {
+                      this.ncLoaded(appKey, token, ncData, nc);
+                    }}
+                  />
+                )}
+              </FormItem>
+              <FormItem {...formItemLayout} label={localization['短信验证码']}>
+                {getFieldDecorator('code', {
+                  rules: [
+                    { required: true, message: localization['请输入手机验证码'] },
+                    {
+                      pattern: /^\d{6}$/,
+                      message:  localization['请输入6位数字验证码']
+                    }
+                  ],
+                  validateTrigger: 'onBlur'
+                })(
+                <div className="form-code">
+                  <Input size="large" placeholder={localization['短信验证码']} />
+                  <Button onClick={this.getMobileCode} type="primary" size="large" disabled={disabled || !ncData}>
+                    {!disabled ? localization['获取验证码'] : number + 's'}
+                  </Button>
+                </div>
+                )}
+              </FormItem>
             </div>
-            )}
-          </FormItem> :
+             :
             <FormItem {...formItemLayout} label={localization['邮箱验证码']}>
               {getFieldDecorator('code', {
                 rules: [
