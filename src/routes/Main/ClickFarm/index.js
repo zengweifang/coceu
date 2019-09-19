@@ -229,7 +229,6 @@ export default class ClickFarm extends Component {
         }).then(json => {
           if (json.code === 10000000) {
               var coinVolume = json.data ? json.data.volume : 0 ;
-              coinVolume = 0.0332
             this.setState({
                 coinVolume
             });
