@@ -229,6 +229,7 @@ export default class ClickFarm extends Component {
         }).then(json => {
           if (json.code === 10000000) {
               var coinVolume = json.data ? json.data.volume : 0 ;
+              coinVolume = 0.0332
             this.setState({
                 coinVolume
             });
@@ -312,21 +313,33 @@ export default class ClickFarm extends Component {
 
 
         const { coinNum , coinVolume, valumeData, selectValue } = this.state;
+        console.log(coinVolume);
+        console.log(coinNum);
 
-        if(parseInt(coinVolume) === 0) {
-            message.warn('余额不足，请选择其它币种');
-            return;
+        if(selectValue.toUpperCase() === 'BTC'){
+            if(coinVolume === 0) {
+                message.warn('余额不足，请选择其它币种');
+                return;
+            }
+            if(coinVolume && coinNum === 0){
+                message.warn('转入资产不能少于等于0');
+                return;
+            }
+        }else{
+            if(coinVolume && coinVolume.toFixed(2) === 0) {
+                message.warn('余额不足，请选择其它币种');
+                return;
+            }
+            if(coinVolume && coinVolume.toFixed(2) > 0 && parseFloat(coinNum).toFixed(2) === 0){
+                message.warn('转入资产不能少于等于0');
+                return;
+            }
         }
-
         if(coinNum === '') {
             message.warn('请输入余额');
             return;
         }
-
-        if(parseInt(coinVolume) > 0 && parseInt(coinNum) === 0){
-            message.warn('转入资产不能少于等于0');
-            return;
-        }
+        
 
         const { userId, name } = valumeData;
 
