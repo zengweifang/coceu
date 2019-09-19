@@ -946,7 +946,11 @@ export default class ClickFarm extends Component {
                                     onChange={this.codeOnchange}/>
                                     <span onClick={
                                         ()=>{
-                                            this.setState({ coinNum: coinVolume === 0 ? coinVolume : coinVolume.toFixed(2) })
+                                            var coinVolumeTemp = coinVolume;
+                                            if(selectValue.toUpperCase() !== 'BTC'){
+                                                coinVolumeTemp = coinVolume === 0 ? coinVolume : coinVolume.toFixed(2)
+                                            }
+                                            this.setState({ coinNum: coinVolumeTemp });
                                         }
                                     } style={{ width: '40%', textAlign: 'right', paddingRight: 10,color:'#E64F4F',cursor: 'pointer' }}>全部转入</span>
                                 </div>
@@ -964,7 +968,7 @@ export default class ClickFarm extends Component {
                                 </div>
                             </div>
 
-                            <span style={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12,marginTop:10,color:'#333'}}>(可用金额{coinVolume === 0 ? 0 : coinVolume.toFixed(2)}{selectValue})</span>
+                            <span style={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12,marginTop:10,color:'#333'}}>(可用金额{ selectValue.toUpperCase() === 'BTC' ? (coinVolume === 0 ? 0 : coinVolume) : (coinVolume === 0 ? 0 : coinVolume.toFixed(2)) }{selectValue})</span>
                             <Button onClick={this.volumeAdd} style={{ width: '100%', marginTop: 20 ,background:'#E64F4F'}} size='large' type='primary'>确定</Button>
                         </div>
                     </ModalInfo>}
