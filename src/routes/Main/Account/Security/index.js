@@ -8,6 +8,8 @@ import classnames from 'classnames';
 import EditMail from './EditMail';
 import EditExPassword from './EditExPassword';
 import EditTradeVerify from './EditTradeVerify';
+import request from 'utils/request';
+import UserCounterInfo  from './UserCounterInfo';
 
 import styles from './index.less';
 
@@ -16,12 +18,43 @@ class Security extends PureComponent {
     unfoldType: ''
   };
 
+  componentDidMount(){
+    this.getUserCounterInfo();
+    this.getCounterInfo();
+  }
+
   handleUnfold = unfoldType => {
     // const { localization, account } = this.props;
     // if (!account.mobile && unfoldType === 'exPassword') {
     //   return message.warn(localization['请先绑定手机号']);
     // }
     this.setState({ unfoldType });
+  };
+
+  // 获取国家和区号
+  getCounterInfo = () => {
+    request('/user/sysdict/countryCode', {
+      method: 'GET'
+    }).then(json => {
+      if (json.code === 10000000) {
+        localStorage.setItem('countryCode', JSON.stringify(json.data));
+      }
+    });
+  };
+
+  // 获取当前用户国家和区号
+  getUserCounterInfo = () => {
+    request('/user/sysdict/userCountryInfo', {
+      method: 'GET'
+    }).then(json => {
+      if (json.code === 10000000) {
+        const userCountryInfo = json.data;
+        var countrySysname = userCountryInfo.countrySysname ? userCountryInfo.countrySysname: '--',
+            countrySyscode = userCountryInfo.countrySyscode ? userCountryInfo.countrySyscode : '--';
+        localStorage.setItem('countrySysname', countrySysname);
+        localStorage.setItem('countrySyscode', countrySyscode);
+      }
+    });
   };
 
   render() {
@@ -36,10 +69,14 @@ class Security extends PureComponent {
       4: '邮箱验证'
     };
 
+    var countrySysname = localStorage.getItem('countrySysname'),
+        countrySyscode = localStorage.getItem('countrySyscode');
+
+
     return (
       <ul className={styles.security}>
         {/* {['mobile', 'mail', 'password', 'exPassword', 'c2cValid', 'google'].map(type => { */}
-          {['mobile', 'mail', 'password', 'exPassword'].map(type => {
+          {['mobile', 'mail', 'password', 'exPassword', 'userCountryInfo'].map(type => {
           const item = {
             mobile: {
               icon: type,
@@ -72,6 +109,14 @@ class Security extends PureComponent {
               btnText: localization[`${exPassword ? '修改' : '设置'}`],
               isShowBtn: true,
               component: <EditExPassword {...{ localization, viewport, account, onFold }} />
+            },
+            userCountryInfo: {
+              type: 'userCountryInfo',
+              icon: 'key',
+              text: `${countrySysname}［电话区号］${countrySyscode}`,
+              btnText: localization[`${exPassword ? '修改' : '设置'}`],
+              isShowBtn: false,
+              component: <UserCounterInfo {...{ localization, viewport, account, onFold }} />
             },
             // c2cValid: {
             //   icon: 'lock',
@@ -115,6 +160,16 @@ class Security extends PureComponent {
                     {unfoldType === type ? localization['取消'] : item[type].btnText}
                   </Button>
                 )}
+                {item[type].type === 'userCountryInfo' && 
+                  (<div>
+                  <Button
+                  onClick={this.handleUnfold.bind(this, unfoldType === type ? '' : type)}
+                  type="primary"
+                  >
+                  {unfoldType === type ? localization['取消'] : item[type].btnText}
+                  </Button>
+                  </div>)
+                }
               </div>
               <div className={styles.action}>{unfoldType === type && item[type].component}</div>
             </li>
