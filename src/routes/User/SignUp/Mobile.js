@@ -72,21 +72,29 @@ class Mobile extends PureComponent {
   };
 
   getMobileCode = () => {
-    const { disabled } = this.state;
+    const { disabled, countrySyscode } = this.state;
     const { localization } = this.props;
     const mobile = this.props.form.getFieldsValue().mobile;
-    if (MOBILE_REGEX.test(mobile)) {
+    if(countrySyscode === '+86' ){
+      if (MOBILE_REGEX.test(mobile)) {
+        if (!disabled) {
+          this.sendMobileCode();
+          this.countDown();
+  
+        }
+      } else {
+        this.props.form.setFields({
+          mobile: {
+            errors: [new Error(localization['请输入正确的手机号'])]
+          }
+        });
+      }
+    }else{
       if (!disabled) {
         this.sendMobileCode();
         this.countDown();
 
       }
-    } else {
-      this.props.form.setFields({
-        mobile: {
-          errors: [new Error(localization['请输入正确的手机号'])]
-        }
-      });
     }
   };
 
@@ -240,7 +248,7 @@ class Mobile extends PureComponent {
             </select>
           </FormItem>
           <Input style={{ display: 'none' }} type="password" />
-          <FormItem>
+          {countrySyscode === '+86' ? (<FormItem>
             <div className={styles.title}>{localization['手机号']}</div>
             <span style={{ zIndex: '999999', position: 'absolute', padding: '0 10px' }}>{countrySyscode}</span>
             {getFieldDecorator('mobile', {
@@ -253,7 +261,18 @@ class Mobile extends PureComponent {
               ],
               validateTrigger: 'onBlur'
             })(<Input size="large" id="mobile" onChange={this.inputValue} style={{paddingLeft: '45px'}} />)}
+          </FormItem>) : <FormItem>
+            <div className={styles.title}>{localization['手机号']}</div>
+            <span style={{ zIndex: '999999', position: 'absolute', padding: '0 10px' }}>{countrySyscode}</span>
+            {getFieldDecorator('mobile', {
+              rules: [
+                { required: true, message: localization['请输入手机号'] }
+              ],
+              validateTrigger: 'onBlur'
+            })(<Input size="large" id="mobile" onChange={this.inputValue} style={{paddingLeft: '45px'}} />)}
           </FormItem>
+
+          }
           <FormItem>
             <div className={styles.title}>{localization['滑动验证']}</div>
             {getFieldDecorator('noCaptche')(

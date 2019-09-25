@@ -36,5 +36,5 @@ console.log(WS_PREFIX, IM_PREFIX);
 
 //阿里 滑动验证 appKey
 // export const appKey = 'FFFF0N00000000006AD1';
-export const appKey = 'FFFF0N000000000081D7'; // 测试
-// export const appKey = 'FFFF0N0000000000845D'; // 线上
+// export const appKey = 'FFFF0N000000000081D7'; // 测试
+export const appKey = 'FFFF0N0000000000845D'; // 线上
