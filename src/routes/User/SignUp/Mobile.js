@@ -228,7 +228,7 @@ class Mobile extends PureComponent {
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             {/* <div className={styles.title}>国家</div> */}
-            <select value={countryName} onChange={(e)=>this.getValue(e)}>
+            <select value={countryName} onChange={(e)=>this.getValue(e)} style={{height:'40px'}}>
               {
                 // 遍历option
                 countrys.map((item,index)=>{
