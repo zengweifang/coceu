@@ -23,11 +23,16 @@ class Mobile extends PureComponent {
     nc: '',
     popupVisible: false,
     inviteCode: getQueryString('inviteCode'),
-    scene: isPC() ? 'nc_register' : 'nc_register_h5'
+    scene: isPC() ? 'nc_register' : 'nc_register_h5',
+    countrys:[],
+    countrySyscode:'+86',
+    countrySysname: '',
+    countryName: ''
   };
 
   componentDidMount() {
     clearInterval(this.timer);
+    this.getCounterInfo();
   }
 
   handleSubmit = e => {
@@ -87,7 +92,7 @@ class Mobile extends PureComponent {
 
   sendMobileCode = () => {
     const { localization } = this.props;
-    const { token, ncData, scene } = this.state;
+    const { token, ncData, scene , countrySyscode} = this.state;
     const { csessionid, sig } = ncData;
     const mobile = this.props.form.getFieldsValue().mobile;
     request('/user/vaildCode/numRandom',{
@@ -109,7 +114,8 @@ class Mobile extends PureComponent {
             sig,
             vtoken: token,
             scene,
-            vaildCodeKey: vaildCodeKey
+            vaildCodeKey: vaildCodeKey,
+            countrySyscode: countrySyscode
           }
         }).then(json => {
           if (json.code === 10000000) {
@@ -139,7 +145,10 @@ class Mobile extends PureComponent {
         mobile,
         password: enPassword,
         code,
-        inviteCode
+        inviteCode,
+        countrySysid:this.state.countrySysid,
+        countrySyscode: this.state.countrySyscode,
+        countrySysname: this.state.countrySysname
       }
     }).then(json => {
       if (json.code === 10000000) {
@@ -184,16 +193,56 @@ class Mobile extends PureComponent {
     })
   };
 
+  getValue=(event)=>{
+    console.log(event.target.value);
+    var data = JSON.parse(event.target.value);
+    this.setState({
+      //默认值改变
+      countryName: event.target.value,
+      countrySyscode: data.value,
+      countrySysname: data.label,
+      countrySysid: data.id
+    })
+
+  }
+
+  // 获取国家和区号
+  getCounterInfo = () => {
+    request('/user/sysdict/countryCode', {
+      method: 'GET'
+    }).then(json => {
+      if (json.code === 10000000) {
+        this.setState({
+          countrys: json.data
+        })
+      }
+    });
+  };
+
   render() {
     const { localization, form, history } = this.props;
     const { getFieldDecorator } = form;
-    const { disabled, number, inviteCode, scene, popupVisible, ncData, mobile } = this.state;
+    const { disabled, number, inviteCode, scene, popupVisible, ncData, mobile ,countrys, countrySyscode, countryName} = this.state;
     return (
       <Fragment>
         <Form onSubmit={this.handleSubmit}>
+          <FormItem>
+            <div className={styles.title}>国家</div>
+            <select value={countryName} onChange={(e)=>this.getValue(e)}>
+              {
+                // 遍历option
+                countrys.map((item,index)=>{
+                  return(
+                    <option key={index} value={JSON.stringify(item)}>{item.label}</option>
+                  )
+                })
+              }
+            </select>
+          </FormItem>
           <Input style={{ display: 'none' }} type="password" />
           <FormItem>
             <div className={styles.title}>{localization['手机号']}</div>
+            <span style={{ zIndex: '999999', position: 'absolute', padding: '0 10px' }}>{countrySyscode}</span>
             {getFieldDecorator('mobile', {
               rules: [
                 { required: true, message: localization['请输入手机号'] },
@@ -203,7 +252,7 @@ class Mobile extends PureComponent {
                 }
               ],
               validateTrigger: 'onBlur'
-            })(<Input size="large" id="mobile" onChange={this.inputValue} />)}
+            })(<Input size="large" id="mobile" onChange={this.inputValue} style={{paddingLeft: '45px'}} />)}
           </FormItem>
           <FormItem>
             <div className={styles.title}>{localization['滑动验证']}</div>
