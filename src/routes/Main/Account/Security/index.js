@@ -48,11 +48,9 @@ class Security extends PureComponent {
       method: 'GET'
     }).then(json => {
       if (json.code === 10000000) {
-        const userCountryInfo = json.data;
-        var countrySysname = userCountryInfo.countrySysname ? userCountryInfo.countrySysname: '--',
-            countrySyscode = userCountryInfo.countrySyscode ? userCountryInfo.countrySyscode : '--';
-        localStorage.setItem('countrySysname', countrySysname);
-        localStorage.setItem('countrySyscode', countrySyscode);
+        var userCountryInfo = json.data;
+        localStorage.setItem('countrySysname', userCountryInfo.countrySysname);
+        localStorage.setItem('countrySyscode', userCountryInfo.countrySyscode);
       }
     });
   };
@@ -69,8 +67,8 @@ class Security extends PureComponent {
       4: '邮箱验证'
     };
 
-    var countrySysname = localStorage.getItem('countrySysname'),
-        countrySyscode = localStorage.getItem('countrySyscode');
+    var countrySysname = localStorage.getItem('countrySysname')!=='null' ? localStorage.getItem('countrySysname') : '--',
+        countrySyscode = localStorage.getItem('countrySyscode')!=='null' ? localStorage.getItem('countrySyscode') : '--';
 
 
     return (
