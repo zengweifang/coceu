@@ -36,7 +36,7 @@ class ModifyMobile extends PureComponent {
   //获取手机短信码
   sendMobileSms = (mobile,type) => {
     const { localization } = this.props;
-    const { token, ncData, scene } = this.state;
+    const { token, ncData, scene, countrySyscode } = this.state;
     const { csessionid, sig } = ncData;
 
     request('/user/vaildCode/numRandom',{
@@ -56,7 +56,8 @@ class ModifyMobile extends PureComponent {
             sessionId: csessionid,
             sig,
             vtoken: token,
-            scene
+            scene,
+            countrySyscode: countrySyscode
           }
         }).then(json => {
           if (json.code === 10000000) {
@@ -275,7 +276,7 @@ class ModifyMobile extends PureComponent {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label={'国家'}>
-          <select value={countryName} onChange={(e)=>this.getValue(e)} style={{height:'40px'}}>
+          <select value={countryName} onChange={(e)=>this.getValue(e)} style={{height:'40px',width:'100%'}}>
             {
               // 遍历option
               countrys.map((item,index)=>{
