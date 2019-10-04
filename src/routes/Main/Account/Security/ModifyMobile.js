@@ -21,7 +21,11 @@ class ModifyMobile extends PureComponent {
     ncData1:'',
     mobile:'',
     ncData2:'',
-    token:''
+    token:'',
+    countrys:[],
+    countrySyscode:'+86',
+    countrySysname: '',
+    countryName: ''
   };
 
   componentWillUnmount() {
@@ -69,7 +73,10 @@ class ModifyMobile extends PureComponent {
       body: {
         oldCode,
         newMobile,
-        newCode
+        newCode,
+        countrySysid:this.state.countrySysid,
+        countrySyscode:this.state.countrySyscode,
+        countrySysname:this.state.countrySysname
       }
     }).then(json => {
       if (json.code === 10000000) {
@@ -186,6 +193,19 @@ class ModifyMobile extends PureComponent {
     })
   };
 
+  getValue=(event)=>{
+    console.log(event.target.value);
+    var data = JSON.parse(event.target.value);
+    this.setState({
+      //默认值改变
+      countryName: event.target.value,
+      countrySyscode: data.value,
+      countrySysname: data.label,
+      countrySysid: data.id
+    })
+
+  }
+
   render() {
     const { localization, viewport, account, form } = this.props;
     const { getFieldDecorator } = form;
@@ -210,7 +230,9 @@ class ModifyMobile extends PureComponent {
       };
     }
 
-    const { disabled, number, newdisabled, newnumber, scene, ncData1, ncData2 ,mobile } = this.state;
+    const { disabled, number, newdisabled, newnumber, scene, ncData1, ncData2 ,mobile, countryName } = this.state;
+    var code = JSON.parse(localStorage.getItem('countryCode'));
+    var countrys = code ? code : [];
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -251,6 +273,18 @@ class ModifyMobile extends PureComponent {
               </Button>
             </div>
           )}
+        </FormItem>
+        <FormItem {...formItemLayout} label={'国家'}>
+          <select value={countryName} onChange={(e)=>this.getValue(e)} style={{height:'40px'}}>
+            {
+              // 遍历option
+              countrys.map((item,index)=>{
+                return(
+                  <option key={index} value={JSON.stringify(item)}>{item.label}</option>
+                )
+              })
+            }
+          </select>
         </FormItem>
         <FormItem {...formItemLayout} label={localization['新手机号']}>
           {getFieldDecorator('newMobile', {
