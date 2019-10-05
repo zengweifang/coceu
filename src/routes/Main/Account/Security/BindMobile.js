@@ -78,8 +78,27 @@ class BindMobile extends PureComponent {
   getMobileCode = () => {
     const { localization, form } = this.props;
     const mobile = form.getFieldValue('mobile');
-    if (MOBILE_REGEX.test(mobile)) {
-      this.sendMobileSms(mobile);
+    // if (MOBILE_REGEX.test(mobile)) {
+    //   this.sendMobileSms(mobile);
+    //   this.setState({
+    //     disabled: true
+    //   });
+    //   this.timer = setInterval(() => {
+    //     let { number } = this.state;
+    //     if (number === 0) {
+    //       clearInterval(this.timer);
+    //       this.setState({
+    //         number: 59,
+    //         disabled: false
+    //       });
+    //     } else {
+    //       this.setState({ number: number - 1 });
+    //     }
+    //   }, 1000);
+    // } else {
+    //   message.info(localization['请输入正确的手机号']);
+    // }
+    this.sendMobileSms(mobile);
       this.setState({
         disabled: true
       });
@@ -95,9 +114,6 @@ class BindMobile extends PureComponent {
           this.setState({ number: number - 1 });
         }
       }, 1000);
-    } else {
-      message.info(localization['请输入正确的手机号']);
-    }
   };
 
   handleSubmit = e => {
@@ -165,8 +181,8 @@ class BindMobile extends PureComponent {
         <FormItem {...formItemLayout} label={localization['手机号']}>
           {getFieldDecorator('mobile', {
             rules: [
-              { required: true, message: localization['请输入手机号'] },
-              { pattern: MOBILE_REGEX, message: localization['手机号不正确'] }
+              { required: true, message: localization['请输入手机号'] }
+              // { pattern: MOBILE_REGEX, message: localization['手机号不正确'] }
             ],
             validateTrigger: 'onBlur'
           })(

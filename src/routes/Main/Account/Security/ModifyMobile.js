@@ -24,8 +24,9 @@ class ModifyMobile extends PureComponent {
     token:'',
     countrys:[],
     countrySyscode:'+86',
-    countrySysname: '',
-    countryName: ''
+    countrySysname: '中国',
+    countrySysid: 'afe98deb8388462f91a322c041dee4bc',
+    countryName: '',
   };
 
   componentWillUnmount() {
@@ -107,12 +108,18 @@ class ModifyMobile extends PureComponent {
 
   getNewMobileCode = () => {
     const { localization, form } = this.props;
+    const { countrySyscode } = this.state;
     const newMobile = form.getFieldValue('newMobile');
-    if (MOBILE_REGEX.test(newMobile)) {
+    if(countrySyscode === '+86'){
+      if (MOBILE_REGEX.test(newMobile)) {
+        this.sendMobileSms(newMobile);
+        this.newcountDown();
+      } else {
+        message.info(localization['请输入正确的手机号']);
+      }
+    }else{
       this.sendMobileSms(newMobile);
       this.newcountDown();
-    } else {
-      message.info(localization['请输入正确的手机号']);
     }
   };
 
@@ -231,7 +238,7 @@ class ModifyMobile extends PureComponent {
       };
     }
 
-    const { disabled, number, newdisabled, newnumber, scene, ncData1, ncData2 ,mobile, countryName } = this.state;
+    const { disabled, number, newdisabled, newnumber, scene, ncData1, ncData2 ,mobile, countryName, countrySyscode } = this.state;
     var code = JSON.parse(localStorage.getItem('countryCode'));
     var countrys = code ? code : [];
 
@@ -287,15 +294,29 @@ class ModifyMobile extends PureComponent {
             }
           </select>
         </FormItem>
-        <FormItem {...formItemLayout} label={localization['新手机号']}>
-          {getFieldDecorator('newMobile', {
-            rules: [
-              { required: true, message: localization['请输入新的手机号'] },
-              { pattern: MOBILE_REGEX, message: localization['手机号不正确'] }
-            ],
-            validateTrigger: 'onBlur'
-          })(<Input size="large"  id="mobile" onChange={this.inputValue} />)}
-        </FormItem>
+        {
+          countrySyscode==='+86' ? (
+            <FormItem {...formItemLayout} label={localization['新手机号']}>
+              {getFieldDecorator('newMobile', {
+                rules: [
+                  { required: true, message: localization['请输入新的手机号'] },
+                  { pattern: MOBILE_REGEX, message: localization['手机号不正确'] }
+                ],
+                validateTrigger: 'onBlur'
+              })(<Input size="large"  id="mobile" onChange={this.inputValue} />)}
+            </FormItem>
+          ) : (
+            <FormItem {...formItemLayout} label={localization['新手机号']}>
+              {getFieldDecorator('newMobile', {
+                rules: [
+                  { required: true, message: localization['请输入新的手机号'] }
+                ],
+                validateTrigger: 'onBlur'
+              })(<Input size="large"  id="mobile" onChange={this.inputValue} />)}
+            </FormItem>
+          )
+        }
+        
         <FormItem  {...formItemLayout} label={localization['滑动验证']}>
             {/* <div>{localization['滑动验证']}</div> */}
           {getFieldDecorator('noCaptche')(

@@ -26,8 +26,10 @@ class Mobile extends PureComponent {
     scene: isPC() ? 'nc_register' : 'nc_register_h5',
     countrys:[],
     countrySyscode:'+86',
-    countrySysname: '',
-    countryName: ''
+    countrySysname: '中国',
+    countrySysid: 'afe98deb8388462f91a322c041dee4bc',
+    countryName: '',
+    
   };
 
   componentDidMount() {
