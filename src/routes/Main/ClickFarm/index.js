@@ -982,6 +982,7 @@ export default class ClickFarm extends Component {
                                     <TabPane tab="社区管理奖励" key="3"></TabPane>
                                     <TabPane tab="社区平级奖励" key="4"></TabPane>
                                     <TabPane tab="社区级差奖励" key="5"></TabPane>
+                                    <TabPane tab="锁仓奖励" key="6"></TabPane>
                                 </Tabs>
                             </div>
 
