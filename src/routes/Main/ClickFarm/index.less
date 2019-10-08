@@ -37,11 +37,11 @@
         .btns{
             a{
                 display: inline-block;
-                background: #E64F4F;
+                // background: #E64F4F;
                 padding: .19vw 1.4vw;
                 border-radius: 2.2vw;
                 font-size: 1vw;
-                color: #fff;
+                color: #E64F4F;
                 margin-left: 1.11vw;
                 &.single_line{
                     padding: 0.67vw 0.7vw;
@@ -166,10 +166,16 @@
                 .single_line{
                     padding: 0.44vw 2.2vw !important;
                     border: 1px solid #E64F4F;
-                    &:first-child{
-                        background: #fff;
-                        color: #E64F4F;
-                    }
+                    // &:first-child{
+                    //     background: #fff;
+                    //     color: #E64F4F;
+                    // }
+                    
+                }
+                .single_line:nth-child(3){
+                    background: #E64F4F;
+                    color: #ffffff;
+                    margin-right: 2vw;
                 }
             }
         }

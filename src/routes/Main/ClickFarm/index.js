@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import request from 'utils/request';
 import DocumentTitle from 'react-document-title';
-import { Table, Row, Col, Tabs, Tag, Icon, Button, Input,Select, message } from 'antd';
+import { Table, Row, Col, Tabs, Tag, Icon, Button, Input,Select, message, Checkbox } from 'antd';
 import ModalInfo from './ModalInfo';
 import PayPasswordForm from './PayPasswordForm';
 import { getLocalStorage, setLocalStorage } from 'utils';
@@ -32,6 +32,7 @@ export default class ClickFarm extends Component {
             showModal: {
                 zr: false,
                 zc: false,
+                sc: false,
                 inviteCode: false, // 邀请码
             },
             listItem: undefined,
@@ -44,7 +45,11 @@ export default class ClickFarm extends Component {
             selectValue: "",
             coinVolume: 0,
             currentPage: 1,
-            rewardType: 0
+            rewardType: 0,
+            contractTime: "30",
+            lockSelectValue: "",
+            lockCoinVolume: 0,
+            isChecked: false
         }
     }
     // 查询登录用户的平台币收益、级别、社区刷单总额、有效用户数信息
@@ -150,7 +155,7 @@ export default class ClickFarm extends Component {
             this.setState({
                 volumeFinanceDetails,
                 totalNum,
-                // rewardType : type
+                rewardType : type
             });
         }
         });
@@ -222,6 +227,32 @@ export default class ClickFarm extends Component {
             }
           });
     };
+
+    coinLockChange = (e, item)=>{
+        this.getCoinVolume(item.key);
+        this.setState({
+            selectValue : e,
+            coinNum: ''
+        })
+    }
+
+    // getCoinLockList 锁仓币种
+    getCoinLockList = () => {
+        request(`/balance/volume/coinLockList`, {
+            method: 'GET'
+          }).then(json => {
+            if (json.code === 10000000) {
+                var coinLockList = json.data;
+                var lockSelectValue = coinLockList[0].name
+                this.getCoinVolume(coinLockList[0].id);
+              this.setState({
+                coinLockList,
+                lockSelectValue
+              });
+            }
+        });
+    };
+
     //
     getCoinVolume = (coinId) => {
         request(`/coin/volume/${coinId}`, {
@@ -244,6 +275,16 @@ export default class ClickFarm extends Component {
         this.setState({ coinNum: e.target.value });
     };
 
+    // 锁仓
+    lockCodeOnchange = e => {
+        const { lockCoinVolume } = this.state;
+        if(e.target.value > lockCoinVolume){
+            e.target.value = lockCoinVolume;
+        }
+        this.setState({ coinNum: e.target.value });
+    };
+    
+
     inviteCodeOnchange = e => {
         this.setState({
             referInviteCode: e.target.value
@@ -257,6 +298,7 @@ export default class ClickFarm extends Component {
             showModal.inviteCode = true;
             showModal.zr = false;
             showModal.zc = false;
+            showModal.sc = false;
             this.setState({ showModal: showModal, referInviteCode: '' })
             return;
         }
@@ -264,6 +306,7 @@ export default class ClickFarm extends Component {
         showModal.inviteCode = false;
         showModal.zr = true;
         showModal.zc = false;
+        showModal.sc = false;
         this.setState({ showModal: showModal, referInviteCode: '' })
     }
 
@@ -286,6 +329,7 @@ export default class ClickFarm extends Component {
             showModal.inviteCode = false;
             showModal.zr = false;
             showModal.zc = false;
+            showModal.sc = false;
             account.referInviteCode = referInviteCode;
             setLocalStorage('account', account);
             this.setState({ showModal, listItem: {}  })
@@ -300,6 +344,67 @@ export default class ClickFarm extends Component {
             referInviteCode: e.target.value
         })
     }
+    // 锁仓转入
+    lockVolumeAdd = async() => {
+        const valid = await this.zrPasswordRef.validate();
+        if(!valid) {
+            return;
+        }
+
+        const { password } = this.zrPasswordRef.getItemValues();
+
+        const { coinNum , lockCoinVolume, valumeData, lockSelectValue, contractTime , isChecked} = this.state;
+
+        if(!isChecked){
+            message.warn('请勾选协议');
+            return;
+        }
+
+        if(lockSelectValue.toUpperCase() === 'BTC'){
+            if(lockCoinVolume === 0) {
+                message.warn('余额不足，请选择其它币种');
+                return;
+            }
+            if(lockCoinVolume && coinNum === 0){
+                message.warn('转入资产不能少于等于0');
+                return;
+            }
+        }else{
+            if(lockCoinVolume && lockCoinVolume.toFixed(2) === 0) {
+                message.warn('余额不足，请选择其它币种');
+                return;
+            }
+            if(lockCoinVolume && lockCoinVolume.toFixed(2) > 0 && parseFloat(coinNum).toFixed(2) === 0){
+                message.warn('转入资产不能少于等于0');
+                return;
+            }
+        }
+        if(coinNum === '') {
+            message.warn('请输入余额');
+            return;
+        }
+
+        const { userId } = valumeData;
+
+        request(`/balance/volume/add`, {
+            method: 'POST',
+            body:{
+                userId,
+                coinSymbol: lockSelectValue,
+                coinNum,
+                exPassword: password,
+                flag:2,
+                contractTime
+            }
+          }).then(json => {
+            if (json.code === 10000000) {
+            //     var coinVolume = json.data ? json.data.volume : 0 ;
+            //   this.setState({
+            //       coinVolume
+            //   });
+            }
+          });
+    }
 
     // 转入
     volumeAdd = async () => {
@@ -312,8 +417,6 @@ export default class ClickFarm extends Component {
 
 
         const { coinNum , coinVolume, valumeData, selectValue } = this.state;
-        console.log(coinVolume);
-        console.log(coinNum);
 
         if(selectValue.toUpperCase() === 'BTC'){
             if(coinVolume === 0) {
@@ -359,6 +462,7 @@ export default class ClickFarm extends Component {
             const { showModal } = this.state;
             showModal.zr = false
             showModal.zc = false
+            showModal.sc = false
             this.volumeUserChange();
             this.getList();
             this.getCoinListNew();
@@ -401,6 +505,7 @@ export default class ClickFarm extends Component {
             const { showModal } = this.state;
             showModal.zr = false
             showModal.zc = false
+            showModal.sc = false;
             this.volumeUserChange();
             this.getList();
             this.setState({
@@ -442,6 +547,7 @@ export default class ClickFarm extends Component {
             this.getCoinListNew();
             this.getCountNum();
             this.volumeUserChange();
+            this.getCoinLockList();
         }else{
             this.props.history.push("/login");
         }
@@ -470,6 +576,22 @@ export default class ClickFarm extends Component {
     componentWillUnmount(){
         clearInterval(this.scroll())
     }
+    // 锁仓时间
+    handleChange = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            contractTime:e.target.value
+            }
+        )
+    }
+
+    handleCheckbox = (e) => {
+        console.log(e.target.checked);
+        this.setState({
+            isChecked:e.target.checked
+            }
+        )
+    }
 
     render() {
         const { localization } = this.props;
@@ -492,7 +614,13 @@ export default class ClickFarm extends Component {
             wk,
             userRank,
             selectValue,
-            coinVolume
+            coinVolume,
+            coinLockList,
+            lockSelectValue,
+            lockCoinVolume,
+            contractTime,
+            isChecked,
+            password
         } = this.state;
 
         const TabPane = Tabs.TabPane;
@@ -635,6 +763,8 @@ export default class ClickFarm extends Component {
                             return '社区平级奖';
                         case 5:
                             return '社区级差奖';
+                        case 6:
+                            return '锁仓奖励';
                         default:
                             return '';
                     }
@@ -733,14 +863,24 @@ export default class ClickFarm extends Component {
                         <div className={`${styles.titles}`}>
                             <span>我的挖矿部落</span>
                             <div className={`${styles.btns}`}>
+                                <span>灵活挖矿:</span>
                                 <a className={`${styles.single_line}`}
                                     onClick={() => {
                                         showModal.zr = false
                                         showModal.zc = true
+                                        showModal.sc = false
                                         this.setState({ showModal: showModal })
                                     }}>转出</a>
                                 <a className={`${styles.single_line}`}
                                     onClick={this.openVolumAdd}>转入</a>
+                                <span>锁仓挖矿:</span>
+                                <a className={`${styles.single_line}`} 
+                                    onClick={() => {
+                                        showModal.zr = false
+                                        showModal.zc = false
+                                        showModal.sc = true
+                                        this.setState({ showModal: showModal })
+                                    }}>去锁仓</a>
                             </div>
                         </div>
                         <Row>
@@ -864,6 +1004,7 @@ export default class ClickFarm extends Component {
                             showModal.inviteCode = e
                             showModal.zr = false
                             showModal.zc = false
+                            showModal.sc = false
                             this.setState({ showModal: showModal })
                         }}
                         style={{
@@ -908,6 +1049,7 @@ export default class ClickFarm extends Component {
                         isShow={(e) => {
                             showModal.zr = e
                             showModal.zc = false
+                            showModal.sc = false
                             this.setState({ showModal: showModal })
                         }}
                         style={{
@@ -989,6 +1131,7 @@ export default class ClickFarm extends Component {
                         isShow={(e) => {
                             showModal.zr = false
                             showModal.zc = e
+                            showModal.sc = false;
                             this.setState({ showModal: showModal })
                         }}
                         style={{
@@ -1072,6 +1215,7 @@ export default class ClickFarm extends Component {
                                     <Button onClick={() => {
                                         showModal.zr = false
                                         showModal.zc = false
+                                        showModal.sc = false;
                                         this.setState({ showModal: showModal })
                                     }} style={{ width: '48%', height: '3.47vw', marginTop: 20, border: '1px solid #e0e0e0', color: '#5c5c5c' }}>取消</Button>
                                     <Button onClick={
@@ -1084,6 +1228,128 @@ export default class ClickFarm extends Component {
                                     } style={{ width: '48%', height: '3.47vw', marginTop: 20, background: '#E64F4F' }} type='primary'>确定转出</Button>
                                 </div>
                             </div>}
+                    </ModalInfo>}
+                    {showModal.sc && <ModalInfo
+                        width='35vw'
+                        isShow={(e) => {
+                            showModal.zr = false
+                            showModal.zc = false
+                            showModal.sc = e
+                            this.setState({ showModal: showModal })
+                        }}
+                        style={{
+                            width: '30%'
+                        }}>
+                        <div style={{ display: 'flex', flex: 1, alignItems: 'center', flexDirection: 'column' }}>
+                            <span style={{ color: '#E64F4F', fontSize: '1.7vw' }}>
+                                锁仓挖矿
+               </span>
+                            <div style={{
+                                display: 'flex',
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 20
+                            }}>
+                                <span style={{ color: '#353535' }}>请选择币种</span>
+                                <Select defaultValue={lockSelectValue} style={{ width: '70%' }} onChange={this.coinLockChange}>
+                                {coinLockList && coinLockList.map(item => {
+                                    return (
+                                    <Option key={item.id} value={item.name}>
+                                        {item.name}
+                                    </Option>
+                                    );
+                                })}
+                                </Select>
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 20
+                            }}>
+                                <span style={{ color: '#353535' }}>锁仓数量</span>
+                                <div style={{
+                                    width: '70%',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    border: '1px solid #eee',
+                                    backgroundColor: '#fff'
+                                }}>
+                                    <Input
+                                    style={{ width: '60%', border: 'none' }}
+                                    placeholder={'请输入余额('+ lockSelectValue +')'}
+                                    value = {coinNum}
+                                    onChange={this.lockCodeOnchange}/>
+                                    <span onClick={
+                                        ()=>{
+                                            var coinVolumeTemp = lockCoinVolume;
+                                            if(lockSelectValue.toUpperCase() !== 'BTC'){
+                                                coinVolumeTemp = lockCoinVolume === 0 ? lockCoinVolume : lockCoinVolume.toFixed(2)
+                                            }
+                                            this.setState({ coinNum: coinVolumeTemp });
+                                        }
+                                    } style={{ width: '40%', textAlign: 'right', paddingRight: 10,color:'#E64F4F',cursor: 'pointer' }}>全部转入</span>
+                                </div>
+                            </div>
+                            <span style={{ display: 'flex', alignSelf: 'flex-end', fontSize: 12,marginTop:10,color:'#333'}}>(可用金额{ lockSelectValue.toUpperCase() === 'BTC' ? (lockCoinVolume === 0 ? 0 : lockCoinVolume) : (lockCoinVolume === 0 ? 0 : lockCoinVolume.toFixed(2)) }{lockSelectValue})</span>
+                            <div style={{
+                                display: 'flex',
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 20
+                            }}>
+                                <span style={{ color: '#353535' }}>合约时间</span>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="30"
+                                        checked={contractTime==='30'}
+                                        onChange={this.handleChange.bind(this)}/> 30天
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="60"
+                                        checked={contractTime==='60'}
+                                        onChange={this.handleChange.bind(this)}/> 60天
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="90"
+                                        checked={contractTime==='90'}
+                                        onChange={this.handleChange.bind(this)}/> 90天
+                                </label>
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 20
+                            }}>
+                                <span style={{ color: '#353535' }}>资金密码</span>
+                                <div style={{ width: '70%' }}>
+                                    <PayPasswordForm {...{ localization, wrappedComponentRef:(form) => this.zrPasswordRef = form }} />
+                                </div>
+                            </div>
+                            <div style={{
+                                display: 'flex',
+                                width: '100%',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginTop: 20
+                            }}>
+                                <Checkbox onChange={this.handleCheckbox.bind(this)} >我已阅读规则说明</Checkbox>
+                            </div>
+
+                            
+                            <Button onClick={this.lockVolumeAdd} style={{ width: '100%', marginTop: 20 ,background:'#E64F4F'}} size='large' type='primary'>确定</Button>
+                        </div>
                     </ModalInfo>}
                 </div>
             </DocumentTitle>
