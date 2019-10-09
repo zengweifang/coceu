@@ -33,6 +33,7 @@ export default class ClickFarm extends Component {
                 zr: false,
                 zc: false,
                 sc: false,
+                gz: false,
                 inviteCode: false, // 邀请码
             },
             listItem: undefined,
@@ -228,8 +229,9 @@ export default class ClickFarm extends Component {
           });
     };
 
+    // 锁仓
     coinLockChange = (e, item)=>{
-        this.getCoinVolume(item.key);
+        this.getLockCoinVolume(item.key);
         this.setState({
             selectValue : e,
             coinNum: ''
@@ -244,12 +246,26 @@ export default class ClickFarm extends Component {
             if (json.code === 10000000) {
                 var coinLockList = json.data;
                 var lockSelectValue = coinLockList[0].name
-                this.getCoinVolume(coinLockList[0].id);
+                this.getLockCoinVolume(coinLockList[0].id);
               this.setState({
                 coinLockList,
                 lockSelectValue
               });
             }
+        });
+    };
+
+     //锁仓
+     getLockCoinVolume = (coinId) => {
+        request(`/coin/volume/${coinId}`, {
+          method: 'GET'
+        }).then(json => {
+          if (json.code === 10000000) {
+              var lockCoinVolume = json.data ? json.data.volume : 0 ;
+            this.setState({
+                lockCoinVolume
+            });
+          }
         });
     };
 
@@ -1345,10 +1361,21 @@ export default class ClickFarm extends Component {
                                 justifyContent: 'space-between',
                                 marginTop: 20
                             }}>
-                                <Checkbox onChange={this.handleCheckbox.bind(this)} >我已阅读规则说明</Checkbox>
+                                <Checkbox onChange={this.handleCheckbox.bind(this)} onClick={()=>{
+                                     showModal.gz = true 
+                                }}>我已阅读规则说明</Checkbox>
                             </div>
-
-                            
+                            <div style={{ fontSize: '10px', fontWeight: 'bold', padding: '1vw', height: '100px', overflowY: 'scroll', border: '1px solid #eee', marginTop: '1vw' }}>
+                                <div style={{ textAlign:'center'}}>锁仓挖矿规则说明</div>
+                                <div>1.起投100USDT市值对应的币种,</div>
+                                <div>2.锁定存入币种数量,合约到期自动锁到钱包</div>
+                                <div>3.锁定存入市值(金本位)</div>
+                                <div>4.每日根据(存入锁仓挖矿市值/结时MG价格*每日收益率)发放MG收i5分享奖励规则参考灵活挖矿</div>
+                                <div>合约计划</div>
+                                <div>30天合约月化收益20%</div>
+                                <div>60天合约月化收益25%</div>
+                                <div>90天合约月化收益30%</div>
+                            </div>
                             <Button onClick={this.lockVolumeAdd} style={{ width: '100%', marginTop: 20 ,background:'#E64F4F'}} size='large' type='primary'>确定</Button>
                         </div>
                     </ModalInfo>}
