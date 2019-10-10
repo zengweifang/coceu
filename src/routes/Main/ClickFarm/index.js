@@ -33,7 +33,6 @@ export default class ClickFarm extends Component {
                 zr: false,
                 zc: false,
                 sc: false,
-                gz: false,
                 inviteCode: false, // 邀请码
             },
             listItem: undefined,
@@ -414,10 +413,17 @@ export default class ClickFarm extends Component {
             }
           }).then(json => {
             if (json.code === 10000000) {
-            //     var coinVolume = json.data ? json.data.volume : 0 ;
-            //   this.setState({
-            //       coinVolume
-            //   });
+                message.success(json.msg);
+                const { showModal } = this.state;
+                showModal.zr = false
+                showModal.zc = false
+                showModal.sc = false
+                // this.volumeUserChange();
+                // this.getList();
+                // this.getCoinListNew();
+                this.setState({ showModal })
+            }else{
+                message.error(json.msg);
             }
           });
     }
@@ -1361,13 +1367,11 @@ export default class ClickFarm extends Component {
                                 justifyContent: 'space-between',
                                 marginTop: 20
                             }}>
-                                <Checkbox onChange={this.handleCheckbox.bind(this)} onClick={()=>{
-                                     showModal.gz = true 
-                                }}>我已阅读规则说明</Checkbox>
+                                <Checkbox onChange={this.handleCheckbox.bind(this)}>我已阅读规则说明</Checkbox>
                             </div>
                             <div style={{ fontSize: '10px', fontWeight: 'bold', padding: '1vw', height: '100px', overflowY: 'scroll', border: '1px solid #eee', marginTop: '1vw' }}>
                                 <div style={{ textAlign:'center'}}>锁仓挖矿规则说明</div>
-                                <div>1.起投100USDT市值对应的币种,</div>
+                                <div>1.起投100USDT市值对应的币种</div>
                                 <div>2.锁定存入币种数量,合约到期自动锁到钱包</div>
                                 <div>3.锁定存入市值(金本位)</div>
                                 <div>4.每日根据(存入锁仓挖矿市值/结时MG价格*每日收益率)发放MG收i5分享奖励规则参考灵活挖矿</div>
