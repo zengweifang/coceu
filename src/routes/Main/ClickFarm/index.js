@@ -418,9 +418,10 @@ export default class ClickFarm extends Component {
                 showModal.zr = false
                 showModal.zc = false
                 showModal.sc = false
-                // this.volumeUserChange();
-                // this.getList();
+                this.volumeUserChange();
+                this.getList();
                 // this.getCoinListNew();
+                this.getCoinLockList();
                 this.setState({ showModal })
             }else{
                 message.error(json.msg);
